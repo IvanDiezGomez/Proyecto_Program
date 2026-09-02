@@ -1,0 +1,1477 @@
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        SIAI Tucumán | Sistema de Alerta Temprana de Inundaciones
+    </title>
+
+    <meta name="description"
+        content="SIAI Tucumán es un sistema integral de alerta temprana para monitorear inundaciones, niveles de agua, precipitaciones y zonas de riesgo en Tucumán.">
+
+    <meta name="robots" content="index, follow">
+
+    <meta name="author" content="SIAI Tucumán">
+
+    <meta name="theme-color" content="#0a3d62">
+
+  
+    <link rel="canonical" href="https://www.tudominio.com/">
+
+
+    <meta property="og:type" content="website">
+
+    <meta property="og:locale" content="es_AR">
+
+    <meta property="og:title" content="SIAI Tucumán | Sistema de Alerta Temprana de Inundaciones">
+
+    <meta property="og:description"
+        content="Sistema integral para el monitoreo y alerta temprana de inundaciones en Tucumán.">
+
+    <meta property="og:url" content="https://www.tudominio.com/">
+
+    <meta property="og:site_name" content="SIAI Tucumán">
+
+    <meta property="og:image" content="https://www.tudominio.com/img/siai-tucuman.jpg">
+
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta name="twitter:title" content="SIAI Tucumán | Alerta Temprana de Inundaciones">
+
+    <meta name="twitter:description"
+        content="Monitoreo de niveles de agua, precipitaciones y zonas de riesgo en Tucumán.">
+
+    <meta name="twitter:image" content="https://www.tudominio.com/img/siai-tucuman.jpg">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+
+
+    <aside class="sidebar d-flex flex-column">
+
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fa-solid fa-house-flood-water"></i>
+            </div>
+
+            <div>
+                <h2>SIAI</h2>
+                <span>Tucumán</span>
+            </div>
+        </div>
+
+        <nav class="menu nav flex-column">
+
+            <p class="menu-title">PRINCIPAL</p>
+
+            <a href="#" class="menu-item nav-link active" data-section="dashboard">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Panel principal</span>
+            </a>
+
+            <a href="#" class="menu-item nav-link" data-section="mapa">
+                <i class="fa-solid fa-map-location-dot"></i>
+                <span>Mapa de riesgo</span>
+            </a>
+
+            <a href="#" class="menu-item nav-link" data-section="alertas">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span>Alertas</span>
+                <span class="badge-menu">4</span>
+            </a>
+
+            <p class="menu-title">MONITOREO</p>
+
+            <a href="#" class="menu-item nav-link" data-section="estaciones">
+                <i class="fa-solid fa-tower-broadcast"></i>
+                <span>Estaciones</span>
+            </a>
+
+            <a href="#" class="menu-item nav-link" data-section="mediciones">
+                <i class="fa-solid fa-chart-line"></i>
+                <span>Mediciones</span>
+            </a>
+
+            <a href="#" class="menu-item nav-link" data-section="historial">
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <span>Historial</span>
+            </a>
+
+            <p class="menu-title">ADMINISTRACIÓN</p>
+
+            <a href="#" class="menu-item nav-link" data-section="usuarios">
+                <i class="fa-solid fa-users"></i>
+                <span>Usuarios</span>
+            </a>
+
+            <a href="#" class="menu-item nav-link" data-section="reportes">
+                <i class="fa-solid fa-file-chart-column"></i>
+                <span>Reportes</span>
+            </a>
+
+            <a href="#" class="menu-item nav-link" data-section="configuracion">
+                <i class="fa-solid fa-gear"></i>
+                <span>Configuración</span>
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="system-status">
+                <span class="status-dot"></span>
+
+                <div>
+                    <strong>Sistema operativo</strong>
+                    <small>Todos los servicios activos</small>
+                </div>
+            </div>
+
+            <div class="user-sidebar">
+
+                <div class="avatar">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+
+                <div>
+                    <strong>Administrador</strong>
+                    <small>Administrador</small>
+                </div>
+
+                <i class="fa-solid fa-ellipsis"></i>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <main class="main-content container-fluid px-0">
+
+
+
+        <header class="topbar">
+
+            <button class="mobile-menu btn btn-link p-0" type="button" aria-label="Abrir menú">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div class="page-title">
+                <h1 id="pageTitle">SIAI</h1>
+                <p>Sistema Integral de Alerta Temprana de Inundaciones</p>
+            </div>
+
+            <div class="top-actions">
+
+                <div class="current-time">
+                    <i class="fa-regular fa-clock"></i>
+                    <span id="clock">--:--:--</span>
+                </div>
+
+                <button class="notification-btn btn" type="button" aria-label="Ver notificaciones">
+                    <i class="fa-regular fa-bell"></i>
+                    <span>4</span>
+                </button>
+
+                <div class="top-user">
+                    <div class="avatar">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                    <div>
+                        <strong>Administrador</strong>
+                        <small>Panel de control</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+
+        <section id="dashboard" class="content-section active-section">
+
+            <section class="welcome">
+
+                <div>
+                    <span class="section-label">
+                        MONITOREO EN TIEMPO REAL
+                    </span>
+
+                    <h2>Estado general de Tucumán</h2>
+
+                    <p>
+                        Monitoreo de estaciones, niveles de agua,
+                        precipitaciones y zonas de riesgo.
+                    </p>
+                </div>
+
+                <div class="last-update">
+                    <i class="fa-solid fa-rotate"></i>
+                    Última actualización:
+                    <strong>18:47:32</strong>
+                </div>
+
+            </section>
+
+
+
+            <section class="stats-grid">
+
+                <div class="stat-card normal">
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+
+                    <div>
+                        <span>Zonas normales</span>
+                        <strong>18</strong>
+                        <small>Sin riesgo actual</small>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card warning">
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                    </div>
+
+                    <div>
+                        <span>Precaución</span>
+                        <strong>5</strong>
+                        <small>Monitoreo preventivo</small>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card danger">
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+
+                    <div>
+                        <span>Riesgo</span>
+                        <strong>3</strong>
+                        <small>Requiere atención</small>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card critical">
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-house-flood-water"></i>
+                    </div>
+
+                    <div>
+                        <span>Emergencia</span>
+                        <strong>1</strong>
+                        <small>Atención inmediata</small>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+
+
+            <section class="dashboard-grid">
+
+                <div class="panel map-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h3>Mapa de monitoreo</h3>
+                            <p>Estado de las estaciones</p>
+                        </div>
+
+                        <button class="btn-outline btn" type="button">
+                            <i class="fa-solid fa-expand"></i>
+                            Ver mapa completo
+                        </button>
+
+
+                    </div>
+
+
+
+                    <div id="map" aria-label="Mapa de monitoreo"></div>
+
+
+
+                    <div class="map-legend">
+
+                        <div>
+                            <span class="legend green"></span>
+                            Normal
+                        </div>
+
+                        <div>
+                            <span class="legend yellow"></span>
+                            Precaución
+                        </div>
+
+                        <div>
+                            <span class="legend orange"></span>
+                            Riesgo
+                        </div>
+
+                        <div>
+                            <span class="legend red"></span>
+                            Emergencia
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+          
+
+                <div class="panel alerts-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+                            <h3>Alertas activas</h3>
+                            <p>Situaciones detectadas</p>
+                        </div>
+
+                        <span class="alert-count">4 activas</span>
+
+                    </div>
+
+
+                    <div class="alert-list">
+
+                        <div class="alert-item critical-alert">
+
+                            <div class="alert-icon">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                            </div>
+
+                            <div class="alert-info">
+
+                                <strong>Alerta roja</strong>
+
+                                <p>
+                                    Nivel de agua crítico
+                                </p>
+
+                                <small>
+                                    Estación E-014 · 18:45
+                                </small>
+
+                            </div>
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+                        </div>
+
+
+                        <div class="alert-item danger-alert">
+
+                            <div class="alert-icon">
+                                <i class="fa-solid fa-cloud-showers-heavy"></i>
+                            </div>
+
+                            <div class="alert-info">
+
+                                <strong>Alerta naranja</strong>
+
+                                <p>
+                                    Precipitaciones intensas
+                                </p>
+
+                                <small>
+                                    Estación E-008 · 18:32
+                                </small>
+
+                            </div>
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+                        </div>
+
+
+                        <div class="alert-item warning-alert">
+
+                            <div class="alert-icon">
+                                <i class="fa-solid fa-water"></i>
+                            </div>
+
+                            <div class="alert-info">
+
+                                <strong>Precaución</strong>
+
+                                <p>
+                                    Aumento del nivel del río
+                                </p>
+
+                                <small>
+                                    Estación E-021 · 18:20
+                                </small>
+
+                            </div>
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+                        </div>
+
+
+                        <div class="alert-item warning-alert">
+
+                            <div class="alert-icon">
+                                <i class="fa-solid fa-droplet"></i>
+                            </div>
+
+                            <div class="alert-info">
+
+                                <strong>Precaución</strong>
+
+                                <p>
+                                    Acumulación de lluvia
+                                </p>
+
+                                <small>
+                                    Estación E-004 · 18:05
+                                </small>
+
+                            </div>
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+                        </div>
+
+                    </div>
+
+                    <button class="btn-full btn" type="button">
+                        Ver todas las alertas
+                    </button>
+
+                </div>
+
+            </section>
+
+
+
+
+            <section class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h3>Estado de estaciones</h3>
+                        <p>Últimas mediciones recibidas</p>
+                    </div>
+
+                    <button class="btn-primary btn" type="button">
+                        <i class="fa-solid fa-plus"></i>
+                        Nueva estación
+                    </button>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table class="table align-middle mb-0">
+
+                        <thead>
+
+                            <tr>
+                                <th>Estación</th>
+                                <th>Zona</th>
+                                <th>Nivel de agua</th>
+                                <th>Precipitación</th>
+                                <th>Estado</th>
+                                <th>Actualización</th>
+                                <th></th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+
+                                <td>
+                                    <div class="station-name">
+                                        <span class="station-icon">
+                                            <i class="fa-solid fa-tower-broadcast"></i>
+                                        </span>
+
+                                        <div>
+                                            <strong>E-001</strong>
+                                            <small>Río Salí</small>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>San Miguel de Tucumán</td>
+
+                                <td>
+                                    <strong>0.82 m</strong>
+                                </td>
+
+                                <td>12.4 mm</td>
+
+                                <td>
+                                    <span class="status normal-status">
+                                        Normal
+                                    </span>
+                                </td>
+
+                                <td>Hace 2 min.</td>
+
+                                <td>
+                                    <button class="action-btn btn" type="button" aria-label="Acciones de la estación E-001">
+                                        <i class="fa-solid fa-ellipsis"></i>
+                                    </button>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    <div class="station-name">
+
+                                        <span class="station-icon">
+                                            <i class="fa-solid fa-tower-broadcast"></i>
+                                        </span>
+
+                                        <div>
+                                            <strong>E-004</strong>
+                                            <small>Arroyo Nueva Esperanza</small>
+                                        </div>
+
+                                    </div>
+                                </td>
+
+                                <td>Yerba Buena</td>
+
+                                <td>
+                                    <strong>1.42 m</strong>
+                                </td>
+
+                                <td>48.7 mm</td>
+
+                                <td>
+                                    <span class="status warning-status">
+                                        Precaución
+                                    </span>
+                                </td>
+
+                                <td>Hace 1 min.</td>
+
+                                <td>
+                                    <button class="action-btn btn" type="button" aria-label="Acciones de la estación E-004">
+                                        <i class="fa-solid fa-ellipsis"></i>
+                                    </button>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    <div class="station-name">
+
+                                        <span class="station-icon">
+                                            <i class="fa-solid fa-tower-broadcast"></i>
+                                        </span>
+
+                                        <div>
+                                            <strong>E-008</strong>
+                                            <small>Río Lules</small>
+                                        </div>
+
+                                    </div>
+                                </td>
+
+                                <td>Lules</td>
+
+                                <td>
+                                    <strong>1.78 m</strong>
+                                </td>
+
+                                <td>72.1 mm</td>
+
+                                <td>
+                                    <span class="status danger-status">
+                                        Riesgo
+                                    </span>
+                                </td>
+
+                                <td>Hace 30 seg.</td>
+
+                                <td>
+                                    <button class="action-btn btn" type="button" aria-label="Acciones de la estación E-008">
+                                        <i class="fa-solid fa-ellipsis"></i>
+                                    </button>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+
+                                <td>
+                                    <div class="station-name">
+
+                                        <span class="station-icon">
+                                            <i class="fa-solid fa-tower-broadcast"></i>
+                                        </span>
+
+                                        <div>
+                                            <strong>E-014</strong>
+                                            <small>Río Marapa</small>
+                                        </div>
+
+                                    </div>
+                                </td>
+
+                                <td>Graneros</td>
+
+                                <td>
+                                    <strong>2.18 m</strong>
+                                </td>
+
+                                <td>112.8 mm</td>
+
+                                <td>
+                                    <span class="status critical-status">
+                                        Emergencia
+                                    </span>
+                                </td>
+
+                                <td>Hace 15 seg.</td>
+
+                                <td>
+                                    <button class="action-btn btn" type="button" aria-label="Acciones de la estación E-014">
+                                        <i class="fa-solid fa-ellipsis"></i>
+                                    </button>
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </section>
+
+
+
+
+        <section id="mapa" class="content-section">
+
+            <header class="section-heading">
+
+                <div>
+                    <span class="section-label">MONITOREO</span>
+                    <h2>Mapa de riesgo</h2>
+                    <p>
+                        Visualización geográfica de las estaciones
+                        y zonas monitoreadas.
+                    </p>
+                </div>
+
+            </header>
+
+            <section class="panel full-map-panel">
+
+                <div id="mapFull">
+
+                </div>
+
+            </section>
+
+        </section>
+
+
+
+
+        <section id="alertas" class="content-section">
+
+            <header class="section-heading">
+
+                <div>
+                    <span class="section-label">MONITOREO</span>
+
+                    <h2>Gestión de alertas</h2>
+
+                    <p>
+                        Consulte y gestione las alertas generadas
+                        por el sistema.
+                    </p>
+                </div>
+
+                <button class="btn-primary btn" type="button">
+                    <i class="fa-solid fa-plus"></i>
+                    Crear alerta
+                </button>
+
+            </header>
+
+
+            <section class="filter-bar">
+
+                <select class="form-select">
+                    <option>Todos los niveles</option>
+                    <option>Verde</option>
+                    <option>Amarillo</option>
+                    <option>Naranja</option>
+                    <option>Rojo</option>
+                </select>
+
+                <select class="form-select">
+                    <option>Todas las zonas</option>
+                    <option>San Miguel de Tucumán</option>
+                    <option>Yerba Buena</option>
+                    <option>Lules</option>
+                    <option>Graneros</option>
+                </select>
+
+                <input class="form-control" type="date">
+
+                <button class="btn-outline btn" type="button">
+                    <i class="fa-solid fa-filter"></i>
+                    Filtrar
+                </button>
+
+            </section>
+
+
+            <section class="alert-cards">
+
+                <div class="big-alert critical">
+
+                    <div class="big-alert-header">
+
+                        <span class="status critical-status">
+                            ROJO
+                        </span>
+
+                        <span>18:45</span>
+
+                    </div>
+
+                    <h3>Nivel de agua crítico</h3>
+
+                    <p>
+                        Se detectó un nivel de agua de 2.18 metros
+                        en la estación E-014.
+                    </p>
+
+                    <div class="alert-location">
+                        <i class="fa-solid fa-location-dot"></i>
+                        Graneros · Río Marapa
+                    </div>
+
+                    <button class="btn-outline btn" type="button">
+                        Ver detalles
+                    </button>
+
+                </div>
+
+
+                <div class="big-alert danger">
+
+                    <div class="big-alert-header">
+
+                        <span class="status danger-status">
+                            NARANJA
+                        </span>
+
+                        <span>18:32</span>
+
+                    </div>
+
+                    <h3>Precipitaciones intensas</h3>
+
+                    <p>
+                        Se registraron 72.1 mm de precipitación
+                        acumulada.
+                    </p>
+
+                    <div class="alert-location">
+                        <i class="fa-solid fa-location-dot"></i>
+                        Lules · Río Lules
+                    </div>
+
+                    <button class="btn-outline btn" type="button">
+                        Ver detalles
+                    </button>
+
+                </div>
+
+            </section>
+
+        </section>
+
+
+
+
+        <section id="estaciones" class="content-section">
+
+            <header class="section-heading">
+
+                <div>
+                    <span class="section-label">MONITOREO</span>
+
+                    <h2>Estaciones de monitoreo</h2>
+
+                    <p>
+                        Administración de estaciones y sensores.
+                    </p>
+                </div>
+
+                <button class="btn-primary btn" type="button">
+                    <i class="fa-solid fa-plus"></i>
+                    Nueva estación
+                </button>
+
+            </header>
+
+
+            <section class="station-grid">
+
+                <div class="station-card">
+
+                    <div class="station-card-top">
+
+                        <span class="station-icon large">
+                            <i class="fa-solid fa-tower-broadcast"></i>
+                        </span>
+
+                        <span class="status normal-status">
+                            Activa
+                        </span>
+
+                    </div>
+
+                    <h3>E-001</h3>
+
+                    <p>Río Salí</p>
+
+                    <div class="station-data">
+
+                        <div>
+                            <span>Nivel</span>
+                            <strong>0.82 m</strong>
+                        </div>
+
+                        <div>
+                            <span>Lluvia</span>
+                            <strong>12.4 mm</strong>
+                        </div>
+
+                    </div>
+
+                    <button class="btn-outline btn full" type="button">
+                        Ver estación
+                    </button>
+
+                </div>
+
+
+                <div class="station-card">
+
+                    <div class="station-card-top">
+
+                        <span class="station-icon large">
+                            <i class="fa-solid fa-tower-broadcast"></i>
+                        </span>
+
+                        <span class="status warning-status">
+                            Precaución
+                        </span>
+
+                    </div>
+
+                    <h3>E-004</h3>
+
+                    <p>Arroyo Nueva Esperanza</p>
+
+                    <div class="station-data">
+
+                        <div>
+                            <span>Nivel</span>
+                            <strong>1.42 m</strong>
+                        </div>
+
+                        <div>
+                            <span>Lluvia</span>
+                            <strong>48.7 mm</strong>
+                        </div>
+
+                    </div>
+
+                    <button class="btn-outline btn full" type="button">
+                        Ver estación
+                    </button>
+
+                </div>
+
+
+                <div class="station-card">
+
+                    <div class="station-card-top">
+
+                        <span class="station-icon large">
+                            <i class="fa-solid fa-tower-broadcast"></i>
+                        </span>
+
+                        <span class="status danger-status">
+                            Riesgo
+                        </span>
+
+                    </div>
+
+                    <h3>E-008</h3>
+
+                    <p>Río Lules</p>
+
+                    <div class="station-data">
+
+                        <div>
+                            <span>Nivel</span>
+                            <strong>1.78 m</strong>
+                        </div>
+
+                        <div>
+                            <span>Lluvia</span>
+                            <strong>72.1 mm</strong>
+                        </div>
+
+                    </div>
+
+                    <button class="btn-outline btn full" type="button">
+                        Ver estación
+                    </button>
+
+                </div>
+
+            </section>
+
+        </section>
+
+
+
+        <section id="mediciones" class="content-section">
+
+            <header class="section-heading">
+
+                <div>
+                    <span class="section-label">DATOS</span>
+
+                    <h2>Mediciones</h2>
+
+                    <p>
+                        Datos registrados por las estaciones.
+                    </p>
+                </div>
+
+            </header>
+
+
+            <section class="metrics-grid">
+
+                <div class="metric-card">
+
+                    <span>Nivel máximo</span>
+
+                    <strong>2.18 m</strong>
+
+                    <small>
+                        Estación E-014
+                    </small>
+
+                </div>
+
+                <div class="metric-card">
+
+                    <span>Precipitación máxima</span>
+
+                    <strong>112.8 mm</strong>
+
+                    <small>
+                        Últimas 24 horas
+                    </small>
+
+                </div>
+
+                <div class="metric-card">
+
+                    <span>Estaciones activas</span>
+
+                    <strong>48</strong>
+
+                    <small>
+                        2 fuera de servicio
+                    </small>
+
+                </div>
+
+            </section>
+
+            <section class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+                        <h3>Últimas mediciones</h3>
+                        <p>Datos recibidos en tiempo real</p>
+                    </div>
+
+                </div>
+
+                <div class="table-container">
+
+                    <table class="table align-middle mb-0">
+
+                        <thead>
+
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Estación</th>
+                                <th>Nivel</th>
+                                <th>Lluvia</th>
+                                <th>Humedad</th>
+                                <th>Temperatura</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>29/08/2026 18:47</td>
+                                <td>E-014</td>
+                                <td>2.18 m</td>
+                                <td>112.8 mm</td>
+                                <td>86%</td>
+                                <td>19.2 °C</td>
+                            </tr>
+
+                            <tr>
+                                <td>29/08/2026 18:46</td>
+                                <td>E-008</td>
+                                <td>1.78 m</td>
+                                <td>72.1 mm</td>
+                                <td>82%</td>
+                                <td>19.8 °C</td>
+                            </tr>
+
+                            <tr>
+                                <td>29/08/2026 18:45</td>
+                                <td>E-004</td>
+                                <td>1.42 m</td>
+                                <td>48.7 mm</td>
+                                <td>78%</td>
+                                <td>20.1 °C</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </section>
+
+
+
+        <section id="historial" class="content-section">
+
+            <header class="section-heading">
+
+                <div>
+                    <span class="section-label">REGISTROS</span>
+
+                    <h2>Historial</h2>
+
+                    <p>
+                        Registro histórico de eventos y alertas.
+                    </p>
+                </div>
+
+            </header>
+
+            <section class="timeline">
+
+                <div class="timeline-item critical">
+
+                    <div class="timeline-icon">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+
+                    <div>
+                        <span>29/08/2026 · 18:45</span>
+                        <h3>Alerta roja generada</h3>
+                        <p>
+                            Estación E-014 superó el nivel crítico.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item danger">
+
+                    <div class="timeline-icon">
+                        <i class="fa-solid fa-cloud-rain"></i>
+                    </div>
+
+                    <div>
+                        <span>29/08/2026 · 18:32</span>
+                        <h3>Alerta naranja</h3>
+                        <p>
+                            Precipitaciones intensas detectadas.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="timeline-item warning">
+
+                    <div class="timeline-icon">
+                        <i class="fa-solid fa-water"></i>
+                    </div>
+
+                    <div>
+                        <span>29/08/2026 · 18:20</span>
+                        <h3>Advertencia</h3>
+                        <p>
+                            Incremento del nivel del río.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </section>
+
+
+
+
+        <section id="usuarios" class="content-section">
+
+            <header class="section-heading">
+
+                <div>
+                    <span class="section-label">ADMINISTRACIÓN</span>
+
+                    <h2>Usuarios</h2>
+
+                    <p>
+                        Gestión de usuarios y permisos.
+                    </p>
+                </div>
+
+                <button class="btn-primary btn" type="button">
+                    <i class="fa-solid fa-user-plus"></i>
+                    Nuevo usuario
+                </button>
+
+            </header>
+
+            <section class="panel">
+
+                <div class="table-container">
+
+                    <table class="table align-middle mb-0">
+
+                        <thead>
+
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Email</th>
+                                <th>Rol</th>
+                                <th>Estado</th>
+                                <th>Último acceso</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>Administrador</td>
+                                <td>admin@siai.com</td>
+                                <td>Administrador</td>
+                                <td>
+                                    <span class="status normal-status">
+                                        Activo
+                                    </span>
+                                </td>
+                                <td>Hoy 18:40</td>
+                            </tr>
+
+                            <tr>
+                                <td>Operador01</td>
+                                <td>operador@siai.com</td>
+                                <td>Operador</td>
+                                <td>
+                                    <span class="status normal-status">
+                                        Activo
+                                    </span>
+                                </td>
+                                <td>Hoy 18:32</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </section>
+
+
+        <section id="reportes" class="content-section">
+
+            <header class="section-heading">
+
+                <div>
+                    <span class="section-label">ANÁLISIS</span>
+
+                    <h2>Reportes</h2>
+
+                    <p>
+                        Estadísticas y reportes del sistema.
+                    </p>
+                </div>
+
+            </header>
+
+
+            <section class="report-grid">
+
+                <div class="report-card">
+
+                    <i class="fa-solid fa-chart-column"></i>
+
+                    <h3>Alertas por período</h3>
+
+                    <p>
+                        Consulte las alertas generadas
+                        durante un período determinado.
+                    </p>
+
+                    <button class="btn-outline btn" type="button">
+                        Generar reporte
+                    </button>
+
+                </div>
+
+
+                <div class="report-card">
+
+                    <i class="fa-solid fa-water"></i>
+
+                    <h3>Niveles de agua</h3>
+
+                    <p>
+                        Evolución histórica de los niveles
+                        registrados.
+                    </p>
+
+                    <button class="btn-outline btn" type="button">
+                        Generar reporte
+                    </button>
+
+                </div>
+
+
+                <div class="report-card">
+
+                    <i class="fa-solid fa-cloud-rain"></i>
+
+                    <h3>Precipitaciones</h3>
+
+                    <p>
+                        Análisis de precipitaciones
+                        por zona.
+                    </p>
+
+                    <button class="btn-outline btn" type="button">
+                        Generar reporte
+                    </button>
+
+                </div>
+
+            </section>
+
+        </section>
+
+
+
+        <section id="configuracion" class="content-section">
+
+            <header class="section-heading">
+
+                <div>
+                    <span class="section-label">SISTEMA</span>
+
+                    <h2>Configuración</h2>
+
+                    <p>
+                        Configuración general del sistema.
+                    </p>
+                </div>
+
+            </header>
+
+
+            <section class="settings-grid">
+
+                <div class="panel settings-panel">
+
+                    <h3>Umbrales de alerta</h3>
+
+                    <p>
+                        Configure los valores utilizados
+                        para determinar el nivel de riesgo.
+                    </p>
+
+                    <div class="setting-row">
+
+                        <label>Alerta amarilla</label>
+
+                        <input class="form-control" type="number" value="1.00">
+
+                        <span>metros</span>
+
+                    </div>
+
+                    <div class="setting-row">
+
+                        <label>Alerta naranja</label>
+
+                        <input class="form-control" type="number" value="1.50">
+
+                        <span>metros</span>
+
+                    </div>
+
+                    <div class="setting-row">
+
+                        <label>Alerta roja</label>
+
+                        <input class="form-control" type="number" value="2.00">
+
+                        <span>metros</span>
+
+                    </div>
+
+                    <button class="btn-primary btn" type="button">
+                        Guardar configuración
+                    </button>
+
+                </div>
+
+
+                <div class="panel settings-panel">
+
+                    <h3>Notificaciones</h3>
+
+                    <p>
+                        Configure los medios de comunicación.
+                    </p>
+
+                    <label class="checkbox-row">
+                        <input class="form-check-input" type="checkbox" checked>
+                        Notificaciones web
+                    </label>
+
+                    <label class="checkbox-row">
+                        <input class="form-check-input" type="checkbox" checked>
+                        Correo electrónico
+                    </label>
+
+                    <label class="checkbox-row">
+                        <input class="form-check-input" type="checkbox">
+                        SMS
+                    </label>
+
+                    <label class="checkbox-row">
+                        <input class="form-check-input" type="checkbox" checked>
+                        Notificaciones móviles
+                    </label>
+
+                </div>
+
+            </section>
+
+        </section>
+
+
+
+
+    </main>
+
+
+    <footer>
+
+        <div>
+            <strong>SIAI Tucumán</strong>
+            <span>
+                Sistema Integral de Alerta Temprana
+            </span>
+        </div>
+
+        <div>
+            © 2026 · SIAI
+        </div>
+
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
