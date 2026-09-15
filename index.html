@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SIAI Tucumán | Sistema de Alerta Temprana de Inundaciones</title>
+<meta name="description" content="SIAI Tucumán es un sistema integral de alerta temprana para monitorear inundaciones, niveles de agua, precipitaciones y zonas de riesgo en Tucumán.">
+<meta name="theme-color" content="#0b3f52">
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
+
+
+<style>
+  :root{ --brand:#0b3f52; --brand-deep:#072934; }
+  .bg-brand{ background-color: var(--brand) !important; }
+  .text-brand{ color: var(--brand) !important; }
+  .border-brand{ border-color: var(--brand) !important; }
+  .brand-icon{ width:38px; height:38px; border-radius:.5rem; background:linear-gradient(160deg,#1c7c93,#145164); }
+  #map, #mapFull{ height:320px; border-radius:.5rem; }
+  #mapFull{ height:520px; }
+  .cursor-pointer{ cursor:pointer; }
+</style>
+</head>
+<body class="bg-light">
+
+
+<nav class="navbar navbar-dark bg-brand px-3 py-2">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+      <span class="brand-icon d-flex align-items-center justify-content-center">
+        <i class="fa-solid fa-house-flood-water"></i>
+      </span>
+      <span>
+        <div class="fw-semibold lh-1">SIAI Tucumán</div>
+        <small class="text-white-50">Alerta temprana de inundaciones</small>
+      </span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMain" aria-label="Abrir menú">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="d-none d-lg-flex align-items-center gap-3 ms-auto">
+      <span class="badge text-bg-light font-monospace">
+        <i class="fa-regular fa-clock me-1"></i><span id="clock">--:--:--</span>
+      </span>
+      <button class="btn btn-outline-light position-relative" type="button" aria-label="Ver notificaciones">
+        <i class="fa-regular fa-bell"></i>
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">4</span>
+      </button>
+      <div class="d-flex align-items-center gap-2 border-start border-light border-opacity-25 ps-3">
+        <span class="rounded-circle bg-white bg-opacity-10 d-flex align-items-center justify-content-center" style="width:34px;height:34px;">
+          <i class="fa-solid fa-user"></i>
+        </span>
+        <span class="small">
+          <div class="fw-semibold">Administrador</div>
+          <div class="text-white-50">Panel de control</div>
+        </span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<div class="bg-white border-bottom sticky-top">
+  <div class="container-fluid px-3">
+    <ul class="nav nav-tabs border-0 flex-nowrap overflow-auto" id="mainTabs" role="tablist">
+      <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#dashboard" type="button"><i class="fa-solid fa-chart-pie me-1"></i>Panel principal</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#mapa" type="button"><i class="fa-solid fa-map-location-dot me-1"></i>Mapa de riesgo</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#alertas" type="button"><i class="fa-solid fa-triangle-exclamation me-1"></i>Alertas <span class="badge bg-danger-subtle text-danger-emphasis ms-1">4</span></button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#estaciones" type="button"><i class="fa-solid fa-tower-broadcast me-1"></i>Estaciones</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#mediciones" type="button"><i class="fa-solid fa-chart-line me-1"></i>Mediciones</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#historial" type="button"><i class="fa-solid fa-clock-rotate-left me-1"></i>Historial</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#usuarios" type="button"><i class="fa-solid fa-users me-1"></i>Usuarios</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#reportes" type="button"><i class="fa-solid fa-file-chart-column me-1"></i>Reportes</button></li>
+      <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#configuracion" type="button"><i class="fa-solid fa-gear me-1"></i>Configuración</button></li>
+    </ul>
+  </div>
+</div>
+
+<main class="container-fluid py-4" style="max-width:1320px;">
+<div class="tab-content">
+
+
+  <div class="tab-pane fade show active" id="dashboard">
+
+    <div class="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-3">
+      <div>
+        <h2 class="text-brand fw-semibold">Estado general de Tucumán</h2>
+        <p class="text-muted mb-0">Monitoreo de estaciones, niveles de agua, precipitaciones y zonas de riesgo.</p>
+      </div>
+      <span class="badge text-bg-light border font-monospace">
+        <i class="fa-solid fa-rotate me-1"></i>Última actualización: <strong>18:47:32</strong>
+      </span>
+    </div>
+
+
+    <div class="card shadow-sm mb-3">
+      <div class="card-body">
+        <div class="d-flex flex-wrap justify-content-between mb-2">
+          <h3 class="h6 mb-0">Nivel más crítico registrado</h3>
+          <span class="font-monospace small">Estación E-014 · Río Marapa · <strong class="text-danger">2.18 m</strong></span>
+        </div>
+        <div class="progress" role="progressbar" style="height:14px;">
+          <div class="progress-bar bg-success" style="width:45%"></div>
+          <div class="progress-bar bg-warning" style="width:20%"></div>
+          <div class="progress-bar bg-orange bg-danger-subtle" style="width:15%"></div>
+          <div class="progress-bar bg-danger" style="width:20%"></div>
+        </div>
+        <div class="d-flex justify-content-between small text-muted font-monospace mt-2">
+          <span>0 m</span><span>1 m</span><span>1.5 m</span><span>2 m</span><span>2.5 m+</span>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row g-3 mb-3">
+      <div class="col-6 col-lg-3">
+        <div class="card h-100 border-start border-4 border-success">
+          <div class="card-body d-flex align-items-center gap-3">
+            <span class="fs-4 text-success"><i class="fa-solid fa-circle-check"></i></span>
+            <div>
+              <div class="small text-muted">Zonas normales</div>
+              <div class="fs-4 fw-semibold font-monospace">18</div>
+              <div class="small text-muted">Sin riesgo actual</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="card h-100 border-start border-4 border-warning">
+          <div class="card-body d-flex align-items-center gap-3">
+            <span class="fs-4 text-warning"><i class="fa-solid fa-circle-exclamation"></i></span>
+            <div>
+              <div class="small text-muted">Precaución</div>
+              <div class="fs-4 fw-semibold font-monospace">5</div>
+              <div class="small text-muted">Monitoreo preventivo</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="card h-100 border-start border-4 border-danger">
+          <div class="card-body d-flex align-items-center gap-3">
+            <span class="fs-4 text-danger"><i class="fa-solid fa-triangle-exclamation"></i></span>
+            <div>
+              <div class="small text-muted">Riesgo</div>
+              <div class="fs-4 fw-semibold font-monospace">3</div>
+              <div class="small text-muted">Requiere atención</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="card h-100 border-start border-4 border-dark">
+          <div class="card-body d-flex align-items-center gap-3">
+            <span class="fs-4"><i class="fa-solid fa-house-flood-water"></i></span>
+            <div>
+              <div class="small text-muted">Emergencia</div>
+              <div class="fs-4 fw-semibold font-monospace">1</div>
+              <div class="small text-muted">Atención inmediata</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row g-3 mb-3">
+      <div class="col-lg-7">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div>
+                <h3 class="h6 mb-0">Mapa de monitoreo</h3>
+                <p class="small text-muted mb-0">Estado de las estaciones</p>
+              </div>
+              <button class="btn btn-outline-secondary btn-sm" type="button" onclick="document.querySelector('[data-bs-target=\'#mapa\']').click()">
+                <i class="fa-solid fa-expand"></i> Ver mapa completo
+              </button>
+            </div>
+            <div id="map"></div>
+            <div class="d-flex flex-wrap gap-3 small text-muted mt-3">
+              <span><i class="fa-solid fa-circle text-success me-1"></i>Normal</span>
+              <span><i class="fa-solid fa-circle text-warning me-1"></i>Precaución</span>
+              <span><i class="fa-solid fa-circle" style="color:#c4602a;"></i> Riesgo</span>
+              <span><i class="fa-solid fa-circle text-danger me-1"></i>Emergencia</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="card shadow-sm h-100">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div>
+                <h3 class="h6 mb-0">Alertas activas</h3>
+                <p class="small text-muted mb-0">Situaciones detectadas</p>
+              </div>
+              <span class="badge bg-danger-subtle text-danger-emphasis">4 activas</span>
+            </div>
+
+            <div class="list-group list-group-flush flex-grow-1">
+              <a href="#" class="list-group-item list-group-item-action d-flex align-items-center gap-3 border-0 px-0">
+                <span class="rounded-3 bg-danger-subtle text-danger d-flex align-items-center justify-content-center" style="width:34px;height:34px;"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                <div class="flex-grow-1">
+                  <div class="fw-semibold small">Alerta roja</div>
+                  <div class="small text-muted">Nivel de agua crítico</div>
+                  <div class="small text-muted font-monospace">Estación E-014 · 18:45</div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-muted"></i>
+              </a>
+              <a href="#" class="list-group-item list-group-item-action d-flex align-items-center gap-3 border-0 px-0">
+                <span class="rounded-3 bg-danger-subtle text-danger d-flex align-items-center justify-content-center" style="width:34px;height:34px;"><i class="fa-solid fa-cloud-showers-heavy"></i></span>
+                <div class="flex-grow-1">
+                  <div class="fw-semibold small">Alerta naranja</div>
+                  <div class="small text-muted">Precipitaciones intensas</div>
+                  <div class="small text-muted font-monospace">Estación E-008 · 18:32</div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-muted"></i>
+              </a>
+              <a href="#" class="list-group-item list-group-item-action d-flex align-items-center gap-3 border-0 px-0">
+                <span class="rounded-3 bg-warning-subtle text-warning-emphasis d-flex align-items-center justify-content-center" style="width:34px;height:34px;"><i class="fa-solid fa-water"></i></span>
+                <div class="flex-grow-1">
+                  <div class="fw-semibold small">Precaución</div>
+                  <div class="small text-muted">Aumento del nivel del río</div>
+                  <div class="small text-muted font-monospace">Estación E-021 · 18:20</div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-muted"></i>
+              </a>
+              <a href="#" class="list-group-item list-group-item-action d-flex align-items-center gap-3 border-0 px-0">
+                <span class="rounded-3 bg-warning-subtle text-warning-emphasis d-flex align-items-center justify-content-center" style="width:34px;height:34px;"><i class="fa-solid fa-droplet"></i></span>
+                <div class="flex-grow-1">
+                  <div class="fw-semibold small">Precaución</div>
+                  <div class="small text-muted">Acumulación de lluvia</div>
+                  <div class="small text-muted font-monospace">Estación E-004 · 18:05</div>
+                </div>
+                <i class="fa-solid fa-chevron-right text-muted"></i>
+              </a>
+            </div>
+            <button class="btn btn-outline-secondary w-100 mt-3" type="button" onclick="document.querySelector('[data-bs-target=\'#alertas\']').click()">Ver todas las alertas</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-start mb-3">
+          <div>
+            <h3 class="h6 mb-0">Estado de estaciones</h3>
+            <p class="small text-muted mb-0">Últimas mediciones recibidas</p>
+          </div>
+          <button class="btn btn-brand btn-sm text-white" style="background-color:var(--brand)" type="button"><i class="fa-solid fa-plus"></i> Nueva estación</button>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead>
+              <tr class="small text-muted">
+                <th>Estación</th><th>Zona</th><th>Nivel de agua</th><th>Precipitación</th><th>Estado</th><th>Actualización</th><th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="d-flex align-items-center gap-2">
+                  <span class="rounded-2 bg-info-subtle text-info d-flex align-items-center justify-content-center" style="width:30px;height:30px;"><i class="fa-solid fa-tower-broadcast"></i></span>
+                  <div><strong>E-001</strong><div class="small text-muted">Río Salí</div></div>
+                </td>
+                <td>San Miguel de Tucumán</td>
+                <td class="font-monospace"><strong>0.82 m</strong></td>
+                <td>12.4 mm</td>
+                <td><span class="badge rounded-pill bg-success-subtle text-success-emphasis">Normal</span></td>
+                <td>Hace 2 min.</td>
+                <td><button class="btn btn-sm btn-light" aria-label="Acciones de la estación E-001"><i class="fa-solid fa-ellipsis"></i></button></td>
+              </tr>
+              <tr>
+                <td class="d-flex align-items-center gap-2">
+                  <span class="rounded-2 bg-info-subtle text-info d-flex align-items-center justify-content-center" style="width:30px;height:30px;"><i class="fa-solid fa-tower-broadcast"></i></span>
+                  <div><strong>E-004</strong><div class="small text-muted">Arroyo Nueva Esperanza</div></div>
+                </td>
+                <td>Yerba Buena</td>
+                <td class="font-monospace"><strong>1.42 m</strong></td>
+                <td>48.7 mm</td>
+                <td><span class="badge rounded-pill bg-warning-subtle text-warning-emphasis">Precaución</span></td>
+                <td>Hace 1 min.</td>
+                <td><button class="btn btn-sm btn-light" aria-label="Acciones de la estación E-004"><i class="fa-solid fa-ellipsis"></i></button></td>
+              </tr>
+              <tr>
+                <td class="d-flex align-items-center gap-2">
+                  <span class="rounded-2 bg-info-subtle text-info d-flex align-items-center justify-content-center" style="width:30px;height:30px;"><i class="fa-solid fa-tower-broadcast"></i></span>
+                  <div><strong>E-008</strong><div class="small text-muted">Río Lules</div></div>
+                </td>
+                <td>Lules</td>
+                <td class="font-monospace"><strong>1.78 m</strong></td>
+                <td>72.1 mm</td>
+                <td><span class="badge rounded-pill bg-danger-subtle text-danger-emphasis">Riesgo</span></td>
+                <td>Hace 30 seg.</td>
+                <td><button class="btn btn-sm btn-light" aria-label="Acciones de la estación E-008"><i class="fa-solid fa-ellipsis"></i></button></td>
+              </tr>
+              <tr>
+                <td class="d-flex align-items-center gap-2">
+                  <span class="rounded-2 bg-info-subtle text-info d-flex align-items-center justify-content-center" style="width:30px;height:30px;"><i class="fa-solid fa-tower-broadcast"></i></span>
+                  <div><strong>E-014</strong><div class="small text-muted">Río Marapa</div></div>
+                </td>
+                <td>Graneros</td>
+                <td class="font-monospace"><strong>2.18 m</strong></td>
+                <td>112.8 mm</td>
+                <td><span class="badge rounded-pill bg-danger text-white">Emergencia</span></td>
+                <td>Hace 15 seg.</td>
+                <td><button class="btn btn-sm btn-light" aria-label="Acciones de la estación E-014"><i class="fa-solid fa-ellipsis"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-pane fade" id="mapa">
+    <div class="mb-3">
+      <h2 class="text-brand fw-semibold">Mapa de riesgo</h2>
+      <p class="text-muted mb-0">Visualización geográfica de las estaciones y zonas monitoreadas.</p>
+    </div>
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div id="mapFull"></div>
+        <div class="d-flex flex-wrap gap-3 small text-muted mt-3">
+          <span><i class="fa-solid fa-circle text-success me-1"></i>Normal</span>
+          <span><i class="fa-solid fa-circle text-warning me-1"></i>Precaución</span>
+          <span><i class="fa-solid fa-circle" style="color:#c4602a;"></i> Riesgo</span>
+          <span><i class="fa-solid fa-circle text-danger me-1"></i>Emergencia</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-pane fade" id="alertas">
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-3">
+      <div>
+        <h2 class="text-brand fw-semibold">Gestión de alertas</h2>
+        <p class="text-muted mb-0">Consulte y gestione las alertas generadas por el sistema.</p>
+      </div>
+      <button class="btn text-white" style="background-color:var(--brand)" type="button"><i class="fa-solid fa-plus"></i> Crear alerta</button>
+    </div>
+
+    <div class="d-flex flex-wrap gap-2 mb-3">
+      <select class="form-select w-auto"><option>Todos los niveles</option><option>Verde</option><option>Amarillo</option><option>Naranja</option><option>Rojo</option></select>
+      <select class="form-select w-auto"><option>Todas las zonas</option><option>San Miguel de Tucumán</option><option>Yerba Buena</option><option>Lules</option><option>Graneros</option></select>
+      <input class="form-control w-auto" type="date">
+      <button class="btn btn-outline-secondary" type="button"><i class="fa-solid fa-filter"></i> Filtrar</button>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="card border-start border-4 border-danger shadow-sm h-100">
+          <div class="card-body">
+            <div class="d-flex justify-content-between small text-muted font-monospace mb-2">
+              <span class="badge bg-danger text-white">ROJO</span><span>18:45</span>
+            </div>
+            <h3 class="h6">Nivel de agua crítico</h3>
+            <p class="small text-muted">Se detectó un nivel de agua de 2.18 metros en la estación E-014.</p>
+            <div class="small text-muted mb-3"><i class="fa-solid fa-location-dot me-1"></i>Graneros · Río Marapa</div>
+            <button class="btn btn-outline-secondary btn-sm" type="button">Ver detalles</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card border-start border-4 border-warning shadow-sm h-100">
+          <div class="card-body">
+            <div class="d-flex justify-content-between small text-muted font-monospace mb-2">
+              <span class="badge bg-warning text-dark">NARANJA</span><span>18:32</span>
+            </div>
+            <h3 class="h6">Precipitaciones intensas</h3>
+            <p class="small text-muted">Se registraron 72.1 mm de precipitación acumulada.</p>
+            <div class="small text-muted mb-3"><i class="fa-solid fa-location-dot me-1"></i>Lules · Río Lules</div>
+            <button class="btn btn-outline-secondary btn-sm" type="button">Ver detalles</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-pane fade" id="estaciones">
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-3">
+      <div>
+        <h2 class="text-brand fw-semibold">Estaciones de monitoreo</h2>
+        <p class="text-muted mb-0">Administración de estaciones y sensores.</p>
+      </div>
+      <button class="btn text-white" style="background-color:var(--brand)" type="button"><i class="fa-solid fa-plus"></i> Nueva estación</button>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class="rounded-3 bg-info-subtle text-info d-flex align-items-center justify-content-center" style="width:42px;height:42px;"><i class="fa-solid fa-tower-broadcast"></i></span>
+              <span class="badge rounded-pill bg-success-subtle text-success-emphasis">Activa</span>
+            </div>
+            <h3 class="h6 mb-0">E-001</h3>
+            <p class="small text-muted">Río Salí</p>
+            <div class="d-flex gap-4 border-top pt-2 mb-3">
+              <div><div class="small text-muted">Nivel</div><strong class="font-monospace">0.82 m</strong></div>
+              <div><div class="small text-muted">Lluvia</div><strong class="font-monospace">12.4 mm</strong></div>
+            </div>
+            <button class="btn btn-outline-secondary w-100" type="button">Ver estación</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class="rounded-3 bg-info-subtle text-info d-flex align-items-center justify-content-center" style="width:42px;height:42px;"><i class="fa-solid fa-tower-broadcast"></i></span>
+              <span class="badge rounded-pill bg-warning-subtle text-warning-emphasis">Precaución</span>
+            </div>
+            <h3 class="h6 mb-0">E-004</h3>
+            <p class="small text-muted">Arroyo Nueva Esperanza</p>
+            <div class="d-flex gap-4 border-top pt-2 mb-3">
+              <div><div class="small text-muted">Nivel</div><strong class="font-monospace">1.42 m</strong></div>
+              <div><div class="small text-muted">Lluvia</div><strong class="font-monospace">48.7 mm</strong></div>
+            </div>
+            <button class="btn btn-outline-secondary w-100" type="button">Ver estación</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <span class="rounded-3 bg-info-subtle text-info d-flex align-items-center justify-content-center" style="width:42px;height:42px;"><i class="fa-solid fa-tower-broadcast"></i></span>
+              <span class="badge rounded-pill bg-danger-subtle text-danger-emphasis">Riesgo</span>
+            </div>
+            <h3 class="h6 mb-0">E-008</h3>
+            <p class="small text-muted">Río Lules</p>
+            <div class="d-flex gap-4 border-top pt-2 mb-3">
+              <div><div class="small text-muted">Nivel</div><strong class="font-monospace">1.78 m</strong></div>
+              <div><div class="small text-muted">Lluvia</div><strong class="font-monospace">72.1 mm</strong></div>
+            </div>
+            <button class="btn btn-outline-secondary w-100" type="button">Ver estación</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-pane fade" id="mediciones">
+    <div class="mb-3">
+      <h2 class="text-brand fw-semibold">Mediciones</h2>
+      <p class="text-muted mb-0">Datos registrados por las estaciones.</p>
+    </div>
+
+    <div class="row g-3 mb-3">
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100"><div class="card-body">
+          <div class="small text-muted">Nivel máximo</div>
+          <div class="fs-2 fw-semibold font-monospace text-brand">2.18 m</div>
+          <div class="small text-muted">Estación E-014</div>
+        </div></div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100"><div class="card-body">
+          <div class="small text-muted">Precipitación máxima</div>
+          <div class="fs-2 fw-semibold font-monospace text-brand">112.8 mm</div>
+          <div class="small text-muted">Últimas 24 horas</div>
+        </div></div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100"><div class="card-body">
+          <div class="small text-muted">Estaciones activas</div>
+          <div class="fs-2 fw-semibold font-monospace text-brand">48</div>
+          <div class="small text-muted">2 fuera de servicio</div>
+        </div></div>
+      </div>
+    </div>
+
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h3 class="h6">Últimas mediciones</h3>
+        <p class="small text-muted">Datos recibidos en tiempo real</p>
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead><tr class="small text-muted"><th>Fecha</th><th>Estación</th><th>Nivel</th><th>Lluvia</th><th>Humedad</th><th>Temperatura</th></tr></thead>
+            <tbody>
+              <tr><td>29/08/2026 18:47</td><td>E-014</td><td>2.18 m</td><td>112.8 mm</td><td>86%</td><td>19.2 °C</td></tr>
+              <tr><td>29/08/2026 18:46</td><td>E-008</td><td>1.78 m</td><td>72.1 mm</td><td>82%</td><td>19.8 °C</td></tr>
+              <tr><td>29/08/2026 18:45</td><td>E-004</td><td>1.42 m</td><td>48.7 mm</td><td>78%</td><td>20.1 °C</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-pane fade" id="historial">
+    <div class="mb-3">
+      <h2 class="text-brand fw-semibold">Historial</h2>
+      <p class="text-muted mb-0">Registro histórico de eventos y alertas.</p>
+    </div>
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="list-group list-group-flush">
+          <div class="list-group-item d-flex gap-3 border-0 border-bottom py-3">
+            <span class="rounded-circle bg-danger-subtle text-danger d-flex align-items-center justify-content-center flex-shrink-0" style="width:34px;height:34px;"><i class="fa-solid fa-triangle-exclamation"></i></span>
+            <div>
+              <div class="small text-muted font-monospace">29/08/2026 · 18:45</div>
+              <h3 class="h6 mb-0">Alerta roja generada</h3>
+              <p class="small text-muted mb-0">Estación E-014 superó el nivel crítico.</p>
+            </div>
+          </div>
+          <div class="list-group-item d-flex gap-3 border-0 border-bottom py-3">
+            <span class="rounded-circle bg-danger-subtle text-danger d-flex align-items-center justify-content-center flex-shrink-0" style="width:34px;height:34px;"><i class="fa-solid fa-cloud-rain"></i></span>
+            <div>
+              <div class="small text-muted font-monospace">29/08/2026 · 18:32</div>
+              <h3 class="h6 mb-0">Alerta naranja</h3>
+              <p class="small text-muted mb-0">Precipitaciones intensas detectadas.</p>
+            </div>
+          </div>
+          <div class="list-group-item d-flex gap-3 border-0 py-3">
+            <span class="rounded-circle bg-warning-subtle text-warning d-flex align-items-center justify-content-center flex-shrink-0" style="width:34px;height:34px;"><i class="fa-solid fa-water"></i></span>
+            <div>
+              <div class="small text-muted font-monospace">29/08/2026 · 18:20</div>
+              <h3 class="h6 mb-0">Advertencia</h3>
+              <p class="small text-muted mb-0">Incremento del nivel del río.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-pane fade" id="usuarios">
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-3">
+      <div>
+        <h2 class="text-brand fw-semibold">Usuarios</h2>
+        <p class="text-muted mb-0">Gestión de usuarios y permisos.</p>
+      </div>
+      <button class="btn text-white" style="background-color:var(--brand)" type="button"><i class="fa-solid fa-user-plus"></i> Nuevo usuario</button>
+    </div>
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead><tr class="small text-muted"><th>Usuario</th><th>Email</th><th>Rol</th><th>Estado</th><th>Último acceso</th></tr></thead>
+            <tbody>
+              <tr><td>Administrador</td><td>admin@siai.com</td><td>Administrador</td><td><span class="badge rounded-pill bg-success-subtle text-success-emphasis">Activo</span></td><td>Hoy 18:40</td></tr>
+              <tr><td>Operador01</td><td>operador@siai.com</td><td>Operador</td><td><span class="badge rounded-pill bg-success-subtle text-success-emphasis">Activo</span></td><td>Hoy 18:32</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-pane fade" id="reportes">
+    <div class="mb-3">
+      <h2 class="text-brand fw-semibold">Reportes</h2>
+      <p class="text-muted mb-0">Estadísticas y reportes del sistema.</p>
+    </div>
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100"><div class="card-body">
+          <span class="rounded-3 bg-info-subtle text-info d-flex align-items-center justify-content-center mb-3" style="width:40px;height:40px;"><i class="fa-solid fa-chart-column"></i></span>
+          <h3 class="h6">Alertas por período</h3>
+          <p class="small text-muted">Consulte las alertas generadas durante un período determinado.</p>
+          <button class="btn btn-outline-secondary btn-sm" type="button">Generar reporte</button>
+        </div></div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100"><div class="card-body">
+          <span class="rounded-3 bg-info-subtle text-info d-flex align-items-center justify-content-center mb-3" style="width:40px;height:40px;"><i class="fa-solid fa-water"></i></span>
+          <h3 class="h6">Niveles de agua</h3>
+          <p class="small text-muted">Evolución histórica de los niveles registrados.</p>
+          <button class="btn btn-outline-secondary btn-sm" type="button">Generar reporte</button>
+        </div></div>
+      </div>
+      <div class="col-md-4">
+        <div class="card shadow-sm h-100"><div class="card-body">
+          <span class="rounded-3 bg-info-subtle text-info d-flex align-items-center justify-content-center mb-3" style="width:40px;height:40px;"><i class="fa-solid fa-cloud-rain"></i></span>
+          <h3 class="h6">Precipitaciones</h3>
+          <p class="small text-muted">Análisis de precipitaciones por zona.</p>
+          <button class="btn btn-outline-secondary btn-sm" type="button">Generar reporte</button>
+        </div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-pane fade" id="configuracion">
+    <div class="mb-3">
+      <h2 class="text-brand fw-semibold">Configuración</h2>
+      <p class="text-muted mb-0">Configuración general del sistema.</p>
+    </div>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <h3 class="h6">Umbrales de alerta</h3>
+            <p class="small text-muted">Configure los valores utilizados para determinar el nivel de riesgo.</p>
+            <div class="row g-2 align-items-center mb-2">
+              <label class="col-7 col-form-label">Alerta amarilla</label>
+              <div class="col-4"><input class="form-control" type="number" value="1.00"></div>
+              <div class="col-1 small text-muted">m</div>
+            </div>
+            <div class="row g-2 align-items-center mb-2">
+              <label class="col-7 col-form-label">Alerta naranja</label>
+              <div class="col-4"><input class="form-control" type="number" value="1.50"></div>
+              <div class="col-1 small text-muted">m</div>
+            </div>
+            <div class="row g-2 align-items-center mb-3">
+              <label class="col-7 col-form-label">Alerta roja</label>
+              <div class="col-4"><input class="form-control" type="number" value="2.00"></div>
+              <div class="col-1 small text-muted">m</div>
+            </div>
+            <button class="btn text-white" style="background-color:var(--brand)" type="button">Guardar configuración</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <h3 class="h6">Notificaciones</h3>
+            <p class="small text-muted">Configure los medios de comunicación.</p>
+            <div class="form-check border-bottom py-2"><input class="form-check-input" type="checkbox" checked><label class="form-check-label">Notificaciones web</label></div>
+            <div class="form-check border-bottom py-2"><input class="form-check-input" type="checkbox" checked><label class="form-check-label">Correo electrónico</label></div>
+            <div class="form-check border-bottom py-2"><input class="form-check-input" type="checkbox"><label class="form-check-label">SMS</label></div>
+            <div class="form-check py-2"><input class="form-check-input" type="checkbox" checked><label class="form-check-label">Notificaciones móviles</label></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<footer class="border-top py-3 px-4 d-flex flex-wrap justify-content-between gap-2 small text-muted">
+  <div><strong class="text-brand">SIAI Tucumán</strong> · Sistema Integral de Alerta Temprana</div>
+  <div>© 2026 · SIAI</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+<script>
+  function tick(){
+    document.querySelectorAll('#clock').forEach(el=>{
+      el.textContent = new Date().toLocaleTimeString('es-AR');
+    });
+  }
+  setInterval(tick, 1000); tick();
+
+  const stations = [
+    { name:'E-001 · Río Salí', lat:-26.8241, lng:-65.2226, color:'#217a53' },
+    { name:'E-004 · Arroyo Nueva Esperanza', lat:-26.8054, lng:-65.2966, color:'#c98a1f' },
+    { name:'E-008 · Río Lules', lat:-26.9086, lng:-65.3411, color:'#c4602a' },
+    { name:'E-014 · Río Marapa', lat:-27.3167, lng:-65.5833, color:'#b83f3f' },
+  ];
+
+  function buildMap(id){
+    const el = document.getElementById(id);
+    if(!el || el._leaflet_id) return; // evita reinicializar
+    const map = L.map(id).setView([-27.0, -65.4], 8);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+    stations.forEach(s=>{
+      L.circleMarker([s.lat, s.lng], { radius:9, color:s.color, fillColor:s.color, fillOpacity:0.9 })
+        .addTo(map).bindPopup(s.name);
+    });
+    return map;
+  }
+
+  document.addEventListener('DOMContentLoaded', ()=> buildMap('map'));
+
+  document.querySelector('[data-bs-target="#mapa"]').addEventListener('shown.bs.tab', ()=>{
+    const m = buildMap('mapFull');
+    setTimeout(()=>{ if(m) m.invalidateSize(); }, 50);
+  });
+</script>
+</body>
+</html>
