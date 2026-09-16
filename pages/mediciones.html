@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SIAI Tucumán - Mediciones</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+</head>
+
+<body class="bg-light">
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <div class="container-fluid">
+
+        <a class="navbar-brand fw-bold"
+           href="index.html">
+
+            <i class="bi bi-water"></i>
+
+            SIAI Tucumán
+
+        </a>
+
+        <button
+            class="navbar-toggler"
+            data-bs-toggle="collapse"
+            data-bs-target="#menu">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div
+            class="collapse navbar-collapse"
+            id="menu">
+
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="../index.html">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="mapa.html">
+                        Mapa
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="alertas.html">
+                        Alertas
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="estaciones.html">
+                        Estaciones
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active"
+                       href="mediciones.html">
+                        Mediciones
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="historial.html">
+                        Historial
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="usuarios.html">
+                        Usuarios
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="reportes.html">
+                        Reportes
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="configuracion.html">
+                        Configuración
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<main class="container-fluid p-4">
+
+    <h1 class="h3">
+
+        <i class="bi bi-graph-up me-2"></i>
+
+        Mediciones
+
+    </h1>
+
+    <p class="text-secondary">
+        Datos registrados por las estaciones.
+    </p>
+
+
+    <!-- FILTROS -->
+
+    <div class="card shadow-sm mb-4">
+
+        <div class="card-body">
+
+            <div class="row g-3">
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+                        Estación
+                    </label>
+
+                    <select class="form-select">
+
+                        <option>Todas</option>
+                        <option>E-001</option>
+                        <option>E-004</option>
+                        <option>E-008</option>
+                        <option>E-014</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="col-md-3">
+
+                    <label class="form-label">
+                        Desde
+                    </label>
+
+                    <input
+                        type="date"
+                        class="form-control">
+
+                </div>
+
+
+                <div class="col-md-3">
+
+                    <label class="form-label">
+                        Hasta
+                    </label>
+
+                    <input
+                        type="date"
+                        class="form-control">
+
+                </div>
+
+
+                <div class="col-md-2 d-flex align-items-end">
+
+                    <button class="btn btn-primary w-100">
+
+                        <i class="bi bi-search"></i>
+
+                        Buscar
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- TABLA -->
+
+    <div class="card shadow-sm">
+
+        <div class="card-header">
+
+            <strong>
+                Últimas mediciones
+            </strong>
+
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="table table-hover align-middle mb-0">
+
+                <thead class="table-light">
+
+                    <tr>
+
+                        <th>Fecha</th>
+                        <th>Estación</th>
+                        <th>Nivel</th>
+                        <th>Precipitación</th>
+                        <th>Humedad</th>
+                        <th>Temperatura</th>
+                        <th>Estado</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td>16/09/2026 18:47</td>
+
+                        <td>E-014</td>
+
+                        <td>
+                            <strong>2.18 m</strong>
+                        </td>
+
+                        <td>112.8 mm</td>
+
+                        <td>86%</td>
+
+                        <td>19.2 °C</td>
+
+                        <td>
+                            <span class="badge text-bg-danger">
+                                Crítico
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>16/09/2026 18:46</td>
+
+                        <td>E-008</td>
+
+                        <td>1.78 m</td>
+
+                        <td>72.1 mm</td>
+
+                        <td>82%</td>
+
+                        <td>19.8 °C</td>
+
+                        <td>
+                            <span class="badge text-bg-warning">
+                                Riesgo
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>16/09/2026 18:45</td>
+
+                        <td>E-004</td>
+
+                        <td>1.42 m</td>
+
+                        <td>48.7 mm</td>
+
+                        <td>78%</td>
+
+                        <td>20.1 °C</td>
+
+                        <td>
+                            <span class="badge text-bg-warning">
+                                Precaución
+                            </span>
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>16/09/2026 18:44</td>
+
+                        <td>E-001</td>
+
+                        <td>0.82 m</td>
+
+                        <td>12.4 mm</td>
+
+                        <td>71%</td>
+
+                        <td>21.4 °C</td>
+
+                        <td>
+                            <span class="badge text-bg-success">
+                                Normal
+                            </span>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+</body>
+
+</html>

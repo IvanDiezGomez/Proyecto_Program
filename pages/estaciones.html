@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>SIAI Tucumán - Estaciones</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+</head>
+
+<body class="bg-light">
+
+<!-- NAVBAR -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+
+    <div class="container-fluid">
+
+        <a class="navbar-brand fw-bold"
+           href="index.html">
+
+            <i class="bi bi-water"></i>
+
+            SIAI Tucumán
+
+        </a>
+
+        <button
+            class="navbar-toggler"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbar">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div
+            class="collapse navbar-collapse"
+            id="navbar">
+
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="../index.html">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="mapa.html">
+                        Mapa
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="alertas.html">
+                        Alertas
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active"
+                       href="estaciones.html">
+                        Estaciones
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="mediciones.html">
+                        Mediciones
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="historial.html">
+                        Historial
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="usuarios.html">
+                        Usuarios
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="reportes.html">
+                        Reportes
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="configuracion.html">
+                        Configuración
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<main class="container-fluid p-4">
+
+    <div class="d-flex
+                justify-content-between
+                align-items-center
+                mb-4">
+
+        <div>
+
+            <h1 class="h3">
+
+                <i class="bi bi-broadcast me-2"></i>
+
+                Estaciones
+
+            </h1>
+
+            <p class="text-secondary">
+                Estaciones de monitoreo hidrológico.
+            </p>
+
+        </div>
+
+        <button class="btn btn-primary">
+
+            <i class="bi bi-plus"></i>
+
+            Nueva estación
+
+        </button>
+
+    </div>
+
+
+    <div class="row g-4">
+
+
+        <!-- E001 -->
+
+        <div class="col-md-6 col-xl-4">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-header
+                            d-flex
+                            justify-content-between">
+
+                    <strong>E-001</strong>
+
+                    <span class="badge text-bg-success">
+                        Activa
+                    </span>
+
+                </div>
+
+                <div class="card-body">
+
+                    <h5>
+                        Río Salí
+                    </h5>
+
+                    <p class="text-secondary">
+                        Estación hidrológica
+                    </p>
+
+                    <hr>
+
+                    <p>
+                        <i class="bi bi-water"></i>
+                        Nivel:
+                        <strong>0.82 m</strong>
+                    </p>
+
+                    <p>
+                        <i class="bi bi-cloud-rain"></i>
+                        Precipitación:
+                        <strong>12.4 mm</strong>
+                    </p>
+
+                    <p>
+                        <i class="bi bi-clock"></i>
+                        Actualización:
+                        hace 2 minutos
+                    </p>
+
+                    <button class="btn btn-outline-primary w-100">
+                        Ver detalles
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- E004 -->
+
+        <div class="col-md-6 col-xl-4">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-header
+                            d-flex
+                            justify-content-between">
+
+                    <strong>E-004</strong>
+
+                    <span class="badge text-bg-warning">
+                        Precaución
+                    </span>
+
+                </div>
+
+                <div class="card-body">
+
+                    <h5>
+                        Arroyo Nueva Esperanza
+                    </h5>
+
+                    <p class="text-secondary">
+                        Estación hidrológica
+                    </p>
+
+                    <hr>
+
+                    <p>
+                        <i class="bi bi-water"></i>
+                        Nivel:
+                        <strong>1.42 m</strong>
+                    </p>
+
+                    <p>
+                        <i class="bi bi-cloud-rain"></i>
+                        Precipitación:
+                        <strong>48.7 mm</strong>
+                    </p>
+
+                    <p>
+                        <i class="bi bi-clock"></i>
+                        Actualización:
+                        hace 1 minuto
+                    </p>
+
+                    <button class="btn btn-outline-primary w-100">
+                        Ver detalles
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- E008 -->
+
+        <div class="col-md-6 col-xl-4">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-header
+                            d-flex
+                            justify-content-between">
+
+                    <strong>E-008</strong>
+
+                    <span class="badge text-bg-danger">
+                        Riesgo
+                    </span>
+
+                </div>
+
+                <div class="card-body">
+
+                    <h5>
+                        Río Lules
+                    </h5>
+
+                    <p class="text-secondary">
+                        Estación hidrológica
+                    </p>
+
+                    <hr>
+
+                    <p>
+                        <i class="bi bi-water"></i>
+                        Nivel:
+                        <strong>1.78 m</strong>
+                    </p>
+
+                    <p>
+                        <i class="bi bi-cloud-rain"></i>
+                        Precipitación:
+                        <strong>72.1 mm</strong>
+                    </p>
+
+                    <p>
+                        <i class="bi bi-clock"></i>
+                        Actualización:
+                        hace 30 segundos
+                    </p>
+
+                    <button class="btn btn-outline-primary w-100">
+                        Ver detalles
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- E014 -->
+
+        <div class="col-md-6 col-xl-4">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-header
+                            d-flex
+                            justify-content-between">
+
+                    <strong>E-014</strong>
+
+                    <span class="badge text-bg-dark">
+                        Emergencia
+                    </span>
+
+                </div>
+
+                <div class="card-body">
+
+                    <h5>
+                        Río Marapa
+                    </h5>
+
+                    <p class="text-secondary">
+                        Estación hidrológica
+                    </p>
+
+                    <hr>
+
+                    <p>
+                        <i class="bi bi-water"></i>
+                        Nivel:
+                        <strong>2.18 m</strong>
+                    </p>
+
+                    <p>
+                        <i class="bi bi-cloud-rain"></i>
+                        Precipitación:
+                        <strong>112.8 mm</strong>
+                    </p>
+
+                    <p>
+                        <i class="bi bi-clock"></i>
+                        Actualización:
+                        hace 15 segundos
+                    </p>
+
+                    <button class="btn btn-outline-danger w-100">
+                        Ver detalles
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+</body>
+
+</html>
