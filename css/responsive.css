@@ -1,0 +1,94 @@
+html {
+    overflow-x: hidden;
+}
+
+body {
+    min-width: 320px;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+}
+
+.navbar-brand {
+    white-space: normal;
+}
+
+main {
+    max-width: 100%;
+}
+
+.table-responsive {
+    -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 767.98px) {
+    .container-fluid {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .navbar-brand {
+        max-width: calc(100% - 56px);
+        font-size: 1rem;
+    }
+
+    .navbar-brand img {
+        flex: 0 0 auto;
+    }
+
+    main.container-fluid {
+        padding-top: 1.25rem !important;
+        padding-bottom: 1.25rem !important;
+    }
+
+    h1.h3 {
+        font-size: 1.45rem;
+    }
+
+    .d-flex.justify-content-between.align-items-center {
+        align-items: flex-start !important;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .card-body {
+        padding: 1rem;
+    }
+
+    .btn {
+        white-space: normal;
+    }
+
+    footer .text-center {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .navbar-brand img {
+        width: 30px !important;
+        height: 30px !important;
+    }
+
+    .row > [class*="col-"] {
+        width: 100%;
+    }
+
+    .table {
+        font-size: 0.875rem;
+    }
+
+    .table td,
+    .table th {
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-card {
+        padding: 1.5rem;
+    }
+}
