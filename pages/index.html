@@ -15,6 +15,13 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+
 <link rel="stylesheet" href="../css/responsive.css">
 </head>
 
@@ -70,7 +77,7 @@
                         </a>
                     </li>
 
-                   
+
 
                     <li class="nav-login">
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -93,7 +100,7 @@
 
 
 
-    <main class="container-fluid p-4">
+<main class="container-fluid p-4">
 
     <a class="navbar-brand fw-bold align-items-center" href="index.html">
         <img src="/image/logogota..png" alt="Logo SIAI Tucumán" style="width: 35px; height: 35px; margin-right: 8px;">
@@ -185,6 +192,55 @@
     </nav>
 
 
+    <main class="container-fluid p-4">
+        <!-- Quiénes somos -->
+        <section id="quienes" class="container py-5">
+            <div class="border rounded shadow-sm p-4 bg-white animate__animated animate__fadeInLeft">
+                <h2 class="text-primary text-center">¿Quiénes somos?</h2>
+                <p class="lead text-center">
+                    Somos <strong>SIAI Tucumán</strong>, un sistema de monitoreo y alerta temprana creado para proteger
+                    a la comunidad frente a los riesgos de inundaciones.
+                    Nuestra misión es cuidar vidas y bienes mediante información confiable y actualizada.
+                </p>
+            </div>
+        </section>
+
+        <!-- Qué hacemos -->
+        <section id="quehacemos" class="container py-5">
+            <div class="border rounded shadow-sm p-4 bg-white animate__animated animate__fadeInRight">
+                <h2 class="text-success text-center">¿Qué hacemos?</h2>
+                <div class="row text-center">
+                    <div class="col-md-3 animate__animated animate__bounceIn">
+                        <i class="bi bi-bar-chart-fill fs-1 text-success"></i>
+                        <p>Monitoreamos estaciones hidrológicas</p>
+                    </div>
+                    <div class="col-md-3 animate__animated animate__bounceIn">
+                        <i class="bi bi-exclamation-triangle-fill fs-1 text-warning"></i>
+                        <p>Emitimos alertas preventivas</p>
+                    </div>
+                    <div class="col-md-3 animate__animated animate__bounceIn">
+                        <i class="bi bi-geo-alt-fill fs-1 text-danger"></i>
+                        <p>Identificamos zonas vulnerables</p>
+                    </div>
+                    <div class="col-md-3 animate__animated animate__bounceIn">
+                        <i class="bi bi-people-fill fs-1 text-info"></i>
+                        <p>Promovemos participación ciudadana</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cómo funciona -->
+        <section id="funciona" class="container py-5">
+            <div class="border rounded shadow-sm p-4 bg-white animate__animated animate__fadeInUp">
+                <h2 class="text-info text-center">¿Cómo funciona?</h2>
+                <p class="text-center">
+                    La página funciona como un tablero interactivo que muestra el estado general de Tucumán,
+                    reporta niveles de agua en tiempo real y brinda recomendaciones prácticas.
+                </p>
+            </div>
+        </section>
+    </main>
 
 
 
@@ -193,11 +249,11 @@
 
         <div class="mb-4">
 
-            <h1 class="h3" style="font-family: fantasy; font-size:300%;">
+            <h3 class="h3" style="font-family: fantasy; font-size:300%;">
                 ESTADO GENERAL DE TUCUMAN
-            </h1>
+            </h3>
 
-            <p class="text-blue" style="font-family: fantasy; font-size:150%;"  >
+            <p class="text-blue" style="font-family: fantasy; font-size:150%;">
 
                 Monitoreo de estaciones, niveles de agua,
                 precipitaciones y zonas de riesgo.
@@ -368,25 +424,363 @@
 
         </div>
 
+        <main class="container-fluid p-4">
+            <section class="container my-5">
+  
+                <div class="bg-white rounded shadow p-4">
+                    <!-- Título llamativo -->
+                    <h2 class="text-center fw-bold mb-4 text-danger">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        Localidades en Riesgo
+                    </h2>
 
-    </main>
-    <footer>
+                    <div class="accordion" id="localidadesAccordion">
 
-        <div class="text-center p-3" style="color: rgb(17, 17, 50)">
-            <img src="/image/logogota..png" alt="Logo SIAI Tucumán"
-                style="width: 25px; height: 25px; margin-right: 4px;">
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#capital">
+                                    Capital
+                                </button>
+                            </h2>
+                            <div id="capital" class="accordion-collapse collapse show">
+                                <div class="accordion-body">
+                                    <div class="row g-4">
+                                        <div class="col-md-4">
+                                            <div class="card shadow-sm h-100 rounded">
+                                                <img src="villa9dejulio.jpg" class="card-img-top rounded-top"
+                                                    alt="Villa 9 de Julio">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Villa 9 de Julio</h5>
+                                                    <p class="card-text">Zona baja cercana a canales, con riesgo de
+                                                        acumulación de agua.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card shadow-sm h-100 rounded">
+                                                <img src="sancayetano.jpg" class="card-img-top rounded-top"
+                                                    alt="San Cayetano">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">San Cayetano</h5>
+                                                    <p class="card-text">Barrio periférico con drenaje insuficiente.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card shadow-sm h-100 rounded">
+                                                <img src="villaalem.jpg" class="card-img-top rounded-top"
+                                                    alt="Villa Alem">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Villa Alem</h5>
+                                                    <p class="card-text">Sector cercano al Río Salí, vulnerable a
+                                                        crecidas.</p>
+                                                </div>
+                                            </div>
+                                        </div>
 
-        &copy; 2026 SIAI Tucumán. Todos los derechos reservados.
+                                        
+                                        <div class="col-md-4">
+                                            <div class="card shadow-sm h-100 rounded">
+                                                <img src="puente24.jpg" class="card-img-top rounded-top"
+                                                    alt="Puente de la 24">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Puente de la 24</h5>
+                                                    <p class="card-text">
+                                                        Zona céntrica que suele inundarse en días de lluvias intensas,
+                                                        afectando la circulación vehicular y peatonal.
+                                                        Requiere monitoreo constante y medidas preventivas para evitar
+                                                        anegamientos.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
 
-        </div>
-    </footer>
+                                        <div class="col-md-4">
+                                            <div class="card shadow-sm h-100 rounded">
+                                                <img src="laspiedritas.jpg" class="card-img-top rounded-top"
+                                                    alt="Las Piedritas">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Las Piedritas</h5>
+                                                    <p class="card-text">Barrio ubicado en la barranca del Río Salí,
+                                                        bajo seguimiento permanente de la Dirección Provincial del
+                                                        Agua ante crecidas del río.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#gran">
+                                    Localidades en San Miguel de Tucumán
+                                </button>
+                            </h2>
+                            <div id="gran" class="accordion-collapse collapse">
+                                <div class="accordion-body">
+                                    <div class="row g-4">
+                                        <div class="col-md-4">
+                                            <div class="card shadow-sm h-100 rounded">
+                                                <img src="yerbabuena.jpg" class="card-img-top rounded-top"
+                                                    alt="Yerba Buena">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Yerba Buena</h5>
+                                                    <p class="card-text">Sectores cercanos al Canal Yerba Buena y zonas
+                                                        bajas de El Corte.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card shadow-sm h-100 rounded">
+                                                <img src="tafiviejo.jpg" class="card-img-top rounded-top"
+                                                    alt="Tafí Viejo">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Tafí Viejo</h5>
+                                                    <p class="card-text">Barrios próximos al Canal Tafí y zonas cercanas
+                                                        al río Lules.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card shadow-sm h-100 rounded">
+                                                <img src="bandario.jpg" class="card-img-top rounded-top"
+                                                    alt="Banda del Río Salí">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Banda del Río Salí</h5>
+                                                    <p class="card-text">Barrios ribereños como Lastenia y San Ramón.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="card shadow-sm h-100 rounded">
+                                                <img src="200viviendas.jpg" class="card-img-top rounded-top"
+                                                    alt="Barrios 40, 140 y 200 Viviendas">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Barrios 40, 140 y 200 Viviendas</h5>
+                                                    <p class="card-text">Sectores de Banda del Río Salí evacuados de
+                                                        forma preventiva en crecidas recientes por su cercanía
+                                                        directa al cauce del río.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#externas">
+                                    Localidades fuera de San Miguel de Tucumán
+                                </button>
+                            </h2>
+                            <div id="externas" class="accordion-collapse collapse">
+                                <div class="accordion-body">
+                                    <div class="row g-4">
+
+                                        <div class="col-md-4">
+                                            <div class="card shadow-sm h-100 rounded">
+                                                <img src="alderetes.jpg" class="card-img-top rounded-top"
+                                                    alt="Alderetes">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Alderetes</h5>
+                                                    <p class="card-text">Localidad del este tucumano, ribereña al Río
+                                                        Salí, con antecedentes de desbordes y anegamientos por
+                                                        crecidas.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="card shadow-sm h-100 rounded">
+                                                <img src="villachicligasta.jpg" class="card-img-top rounded-top"
+                                                    alt="Villa Chicligasta">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Villa Chicligasta</h5>
+                                                    <p class="card-text">Localidad del sur de la provincia,
+                                                        vulnerable al desborde de ríos durante temporales intensos,
+                                                        con aislamiento frecuente de caminos rurales.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="card shadow-sm h-100 rounded">
+                                                <img src="monteagudo.jpg" class="card-img-top rounded-top"
+                                                    alt="Monteagudo">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Monteagudo</h5>
+                                                    <p class="card-text">Localidad del sur de la provincia,
+                                                        vulnerable al desborde de ríos durante temporales intensos,
+                                                        con aislamiento frecuente de caminos rurales.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="card shadow-sm h-100 rounded">
+                                                <img src="cruzalta.jpg" class="card-img-top rounded-top"
+                                                    alt="Cruz Alta">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Cruz Alta</h5>
+                                                    <p class="card-text">Zona de la llanura aluvial del Salí, con
+                                                        napas altas y riesgo de anegamiento por lluvias intensas.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="card shadow-sm h-100 rounded">
+                                                <img src="leales.jpg" class="card-img-top rounded-top" alt="Leales">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Leales</h5>
+                                                    <p class="card-text">Localidad ubicada entre las rutas 38 y 9,
+                                                        en la llanura aluvial del Salí, con napas altas y riesgo de
+                                                        anegamiento por lluvias intensas.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </main>
+
+
+        <main class="container-fluid p-4">
+            <section class="container my-5">
+                <div class="bg-white rounded shadow p-4">
+                    <h2 class="text-center fw-bold mb-4 text-success">
+                        <i class="bi bi-shield-check me-2"></i>
+                        Medidas Preventivas
+                    </h2>
+
+                    <div class="row g-4 text-center">
+
+                        <div class="col-md-4">
+                            <div class="card h-100 shadow-sm border-success animate__animated animate__fadeInUp">
+                                <img src="limpiar_desagues.jpg" class="card-img-top rounded-top" alt="Limpiar desagües">
+                                <div class="card-body">
+                                    <h5 class="card-title">Limpiar desagües</h5>
+                                    <p class="card-text">
+                                        Mantener los desagües y canales libres de basura y hojas es fundamental para que
+                                        el agua de lluvia pueda circular sin obstrucciones.
+                                        Una limpieza periódica evita acumulaciones que pueden provocar inundaciones en
+                                        calles y viviendas.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            <div
+                                class="card h-100 shadow-sm border-warning animate__animated animate__fadeInUp animate__delay-1s">
+                                <img src="no_tirar_basura.jpg" class="card-img-top rounded-top" alt="No tirar basura">
+                                <div class="card-body">
+                                    <h5 class="card-title">No tirar basura</h5>
+                                    <p class="card-text">
+                                        Arrojar residuos en la vía pública o en cursos de agua bloquea el drenaje
+                                        natural y aumenta el riesgo de desbordes.
+                                        Mantener la ciudad limpia es una responsabilidad compartida que protege a todos.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div
+                                class="card h-100 shadow-sm border-danger animate__animated animate__fadeInUp animate__delay-2s">
+                                <img src="kit_emergencia.jpg" class="card-img-top rounded-top" alt="Kit de emergencia">
+                                <div class="card-body">
+                                    <h5 class="card-title">Kit de emergencia</h5>
+                                    <p class="card-text">
+                                        Preparar un kit con linterna, agua potable, radio, medicamentos y documentos
+                                        importantes garantiza que la familia esté lista para actuar rápidamente en caso
+                                        de evacuación o cortes de servicios básicos.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div
+                                class="card h-100 shadow-sm border-primary animate__animated animate__fadeInUp animate__delay-3s">
+                                <img src="alertas_oficiales.jpg" class="card-img-top rounded-top"
+                                    alt="Seguir alertas oficiales">
+                                <div class="card-body">
+                                    <h5 class="card-title">Seguir alertas oficiales</h5>
+                                    <p class="card-text">
+                                        Consultar siempre las alertas emitidas por el sistema SIAI y organismos
+                                        oficiales permite tomar decisiones informadas.
+                                        Estas alertas indican cuándo es necesario evacuar o extremar precauciones.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div
+                                class="card h-100 shadow-sm border-info animate__animated animate__fadeInUp animate__delay-4s">
+                                <img src="rutas_evacuacion.jpg" class="card-img-top rounded-top"
+                                    alt="Rutas de evacuación">
+                                <div class="card-body">
+                                    <h5 class="card-title">Rutas de evacuación</h5>
+                                    <p class="card-text">
+                                        Identificar previamente caminos seguros hacia zonas altas y centros de
+                                        evacuación reduce el tiempo de reacción en una emergencia.
+                                        Es recomendable que cada familia tenga un plan de salida definido y lo practique
+                                        regularmente.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </main>
+
+
+        <footer class="bg-primary text-white text-center py-4 mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h6><i class="bi bi-geo-alt-fill"></i> Dirección</h6>
+                        <p>San Miguel de Tucumán, Argentina</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h6><i class="bi bi-envelope-fill"></i> Contacto</h6>
+                        <p>info@siai-tucuman.org</p>
+                    </div>
+                </div>
+                <hr class="border-light">
+                <p class="mb-0">© 2026 SIAI Tucumán - Sistema de Alerta Temprana</p>
+            </div>
+        </footer>
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-    </script>
-    <script src="/js/index.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+        </script>
+        <script src="/js/index.js"></script>
 
-    </body>
+        </body>
 
 </html>
