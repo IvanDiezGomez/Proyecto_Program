@@ -174,7 +174,7 @@ Las diferentes páginas del sistema se encuentran relacionadas mediante enlaces 
 
 ```text
 Proyecto_Program/
----Css
+
 │
 ├── image/
 │   └── ...
@@ -195,7 +195,7 @@ Proyecto_Program/
 │   ├── mediciones.html
 │   ├── reportes.html
 │   └── usuarios.html
-│
+        Css  │
 └── README.md
 ```
 
