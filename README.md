@@ -215,6 +215,6 @@ También se puede utilizar **Visual Studio Code** junto con **Live Server** para
 ---
 ## Enlaces y Accesos rapidos del proyecto
 
-* Demo en Netlify: ** [https://sistemaprevencion.netlify.app]
+* https://siaitucuman-opcgjxjly-ivanox28-7947s-projects.vercel.app/
 * Repositorio en GitHub: ** [https://github.com/IvanDiezGomez/Proyecto_Program]
 
