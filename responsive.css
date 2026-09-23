@@ -1,11 +1,11 @@
-html {
+﻿html {
     overflow-x: hidden;
 }
 
 body {
     min-width: 320px;
     overflow-x: hidden;
-    background-image: url('image/fondo.jpg');
+    background-image: url('img/fondo.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -103,3 +103,4 @@ main {
         padding: 1.5rem;
     }
 }
+
