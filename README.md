@@ -174,16 +174,13 @@ Las diferentes páginas del sistema se encuentran relacionadas mediante enlaces 
 
 ```text
 Proyecto_Program/
----Css
-│
-├── image/
+
+├── img/
 │   └── ...
-│
-├── js/
 │   ├── index.js
-│   └── login.js
-│
-├── pages/
+│   ├── login.js
+│   ├── agregar-alerta.html
+│   ├── agregar-alerta.js
 │   ├── index.html
 │   ├── login.html
 │   ├── admi.html
@@ -194,6 +191,7 @@ Proyecto_Program/
 │   ├── mapa.html
 │   ├── mediciones.html
 │   ├── reportes.html
+    ├── responsive.html
 │   └── usuarios.html
 │
 └── README.md
