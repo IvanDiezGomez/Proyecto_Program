@@ -8,6 +8,10 @@ if (btnLogin && usuario && password) {
         if (usuario.value === "admin" && password.value === "admin") {
             alert("Bienvenido");
             window.location.href = "admi.html";
+            }
+            else if (usuario.value === "user" && password.value === "user") {
+            alert("ingrese usuario y contraseña");
+            
         } else {
             alert("Usuario o contraseña incorrectos");
         }
