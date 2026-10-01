@@ -1,196 +1,105 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="SIAI Tucumán es un dashboard para monitoreo, alertas y mediciones de estaciones ambientales y datos climáticos.">
-    <meta name="keywords" content="SIAI Tucumán, dashboard, alertas, estaciones, mediciones, clima, monitoreo">
+
+    <title>SIAI Tucumán | Alerta temprana de inundaciones y monitoreo de ríos</title>
+    <meta name="description" content="Monitoreá en tiempo real los niveles de agua, alertas y zonas de riesgo de inundación en Tucumán. Conocé las medidas preventivas.">
     <meta name="author" content="SIAI Tucumán">
     <meta name="robots" content="index, follow">
 
-    <title>SIAI Tucumán - Dashboard</title>
+  
+    <link rel="canonical" href="https://siaitucuman.netlify.app/">
+    <link rel="icon" type="image/png" href="/img/logogota..png" sizes="32x32">
+
+ 
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_AR">
+    <meta property="og:title" content="SIAI Tucumán | Alerta temprana de inundaciones">
+    <meta property="og:description" content="Niveles de agua, alertas y zonas de riesgo en Tucumán.">
+    <meta property="og:image" content="https://siaitucuman.netlify.app/img/logo-siai.png">
+    <meta property="og:url" content="https://siaitucuman.netlify.app/">
 
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css">
     <link rel="stylesheet" href="responsive.css">
 </head>
 
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+<body>
 
-        <div class="container-fluid">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" aria-label="Navegación principal">
+            <div class="container-fluid">
 
-            <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
-                <img src="../image/logogota..png" alt="Logo SIAI Tucumán" class="logo-siai"
-                    style="width: 35px; height: 35px; margin-right: 8px;">
-                SIAI Tucumán
-            </a>
+                <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
+                    <img src="/img/logogota..png" alt="Logo SIAI Tucumán" class="logo-siai"
+                        style="width: 35px; height: 35px; margin-right: 8px;" width="35" height="35">
+                    SIAI Tucumán
+                </a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSIAI">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSIAI" aria-controls="navbarSIAI" aria-expanded="false"
+                    aria-label="Mostrar u ocultar el menú">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-                <span class="navbar-toggler-icon"></span>
+                <div class="collapse navbar-collapse" id="navbarSIAI">
+                    <ul class="navbar-nav ms-auto">
 
-            </button>
+                        <li class="nav-item">
+                            <a class="nav-link" href="mapa.html">
+                                <i class="bi bi-map"></i>
+                                Mapa
+                            </a>
+                        </li>
 
-            <div class="collapse navbar-collapse" id="navbarSIAI">
+                        <li class="nav-item">
+                            <a class="nav-link" href="alertas.html">
+                                <i class="bi bi-exclamation-triangle"></i>
+                                Alertas
+                                <span class="badge bg-danger">4</span>
+                            </a>
+                        </li>
 
-                <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="estaciones.html">
+                                <i class="bi bi-broadcast"></i>
+                                Estaciones
+                            </a>
+                        </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link" href="mediciones.html">
+                                <i class="bi bi-graph-up"></i>
+                                Mediciones
+                            </a>
+                        </li>
 
+                        <li class="nav-login">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <a class="btn btn-primary me-md-2" href="login.html">LOGIN</a>
+                            </div>
+                        </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="mapa.html">
-                            <i class="bi bi-map"></i>
-                            Mapa
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="alertas.html">
-                            <i class="bi bi-exclamation-triangle"></i>
-                            Alertas
-                            <span class="badge bg-danger">4</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="estaciones.html">
-                            <i class="bi bi-broadcast"></i>
-                            Estaciones
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="mediciones.html">
-                            <i class="bi bi-graph-up"></i>
-                            Mediciones
-                        </a>
-                    </li>
-
-
-
-                    <li class="nav-login">
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <a class="btn btn-primary me-md-2" href="login.html">LOGIN</a>
-
-                        </div>
-                    </li>
-
-                </ul>
+                    </ul>
+                </div>
 
             </div>
-
-        </div>
-
-    </nav>
-</header>
-
-
-
-
-
-
-<main class="container-fluid p-4">
-
-    <a class="navbar-brand fw-bold align-items-center" href="index.html">
-        <img src="../image/logogota..png" alt="Logo SIAI Tucumán" style="width: 35px; height: 35px; margin-right: 8px;">
-        SIAI Tucumán
-    </a>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSIAI">
-
-        <span class="navbar-toggler-icon"></span>
-
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSIAI">
-
-        <ul class="navbar-nav ms-auto">
-
-
-
-            <li class="nav-item">
-                <a class="nav-link" href="mapa.html">
-                    <i class="bi bi-map"></i>
-                    Mapa
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="alertas.html">
-                    <i class="bi bi-exclamation-triangle"></i>
-                    Alertas
-                    <span class="badge bg-danger">4</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="estaciones.html">
-                    <i class="bi bi-broadcast"></i>
-                    Estaciones
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="mediciones.html">
-                    <i class="bi bi-graph-up"></i>
-                    Mediciones
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="historial.html">
-                    <i class="bi bi-clock-history"></i>
-                    Historial
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="usuarios.html">
-                    <i class="bi bi-people"></i>
-                    Usuarios
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="reportes.html">
-                    <i class="bi bi-file-earmark-bar-graph"></i>
-                    Reportes
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="configuracion.html">
-                    <i class="bi bi-gear"></i>
-                    Configuración
-                </a>
-            </li>
-
-            <li class="nav-login">
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <a class="btn btn-primary me-md-2" href="login.html">LOGIN</a>
-
-                </div>
-            </li>
-
-        </ul>
-
-    </div>
-
-    </div>
-
-    </nav>
+        </nav>
+    </header>
 
 
     <main class="container-fluid p-4">
-        <!-- Quiénes somos -->
+
+        <h1 class="text-center fw-bold my-4">
+            SIAI Tucumán: sistema de alerta temprana de inundaciones
+        </h1>
+
+       
         <section id="quienes" class="container py-5">
             <div class="border rounded shadow-sm p-4 bg-white animate__animated animate__fadeInLeft">
                 <h2 class="text-primary text-center">¿Quiénes somos?</h2>
@@ -202,7 +111,7 @@
             </div>
         </section>
 
-        <!-- Qué hacemos -->
+        
         <section id="quehacemos" class="container py-5">
             <div class="border rounded shadow-sm p-4 bg-white animate__animated animate__fadeInRight">
                 <h2 class="text-success text-center">¿Qué hacemos?</h2>
@@ -227,7 +136,7 @@
             </div>
         </section>
 
-        <!-- Cómo funciona -->
+
         <section id="funciona" class="container py-5">
             <div class="border rounded shadow-sm p-4 bg-white animate__animated animate__fadeInUp">
                 <h2 class="text-info text-center">¿Cómo funciona?</h2>
@@ -237,196 +146,84 @@
                 </p>
             </div>
         </section>
-    </main>
 
+        <section id="estado" class="container-fluid py-4">
 
-
-
-    <main class="container-fluid p-4">
-
-        <div class="mb-4">
-
-            <h3 class="h3" style="font-family: fantasy; font-size:300%;">
-                ESTADO GENERAL DE TUCUMAN
-            </h3>
-
-            <p class="text-blue" style="font-family: fantasy; font-size:150%;">
-
-                Monitoreo de estaciones, niveles de agua,
-                precipitaciones y zonas de riesgo.
-
-            </p>
-
-        </div>
-
-
-
-
-        <div class="alert alert-success">
-
-            <i class="bi bi-check-circle me-2"></i>
-
-            Sistema operativo.
-            Última actualización:
-            <strong>18:47:32</strong>
-
-        </div>
-
-
-
-
-        <div class="row g-4">
-
-
-            <div class="col-md-6 col-xl-3">
-
-                <div class="card shadow-sm h-100">
-
-                    <div class="card-body">
-
-                        <h6 class="text-secondary">
-                            Zonas normales
-                        </h6>
-
-                        <h2>
-                            18
-                        </h2>
-
-                        <span class="badge text-bg-success">
-
-                            Sin riesgo actual
-
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="col-md-6 col-xl-3">
-
-                <div class="card shadow-sm h-100">
-
-                    <div class="card-body">
-
-                        <h6 class="text-secondary">
-                            Precaución
-                        </h6>
-
-                        <h2>
-                            5
-                        </h2>
-
-                        <span class="badge text-bg-warning">
-
-                            Monitoreo preventivo
-
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="col-md-6 col-xl-3">
-
-                <div class="card shadow-sm h-100">
-
-                    <div class="card-body">
-
-                        <h6 class="text-secondary">
-                            Riesgo
-                        </h6>
-
-                        <h2>
-                            3
-                        </h2>
-
-                        <span class="badge text-bg-danger">
-
-                            Requiere atención
-
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="col-md-6 col-xl-3">
-
-                <div class="card shadow-sm h-100">
-
-                    <div class="card-body">
-
-                        <h6 class="text-secondary">
-                            Emergencia
-                        </h6>
-
-                        <h2>
-                            1
-                        </h2>
-
-                        <span class="badge text-bg-dark">
-
-                            Atención inmediata
-
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-        </div>
-
-
-        <!-- NIVEL CRÍTICO -->
-
-        <div class="card shadow-sm mt-4">
-
-            <div class="card-body">
-
-                <h5>
-                    Nivel de agua más crítico
-                </h5>
-
-                <h2 class="text-danger">
-                    2.18 m
-                </h2>
-
-                <p class="text-secondary">
-                    Estación E-014 · Río Marapa
+            <div class="mb-4">
+                <h2 class="display-5 fw-bold text-uppercase">Estado general de Tucumán</h2>
+                <p class="lead text-primary">
+                    Monitoreo de estaciones, niveles de agua, precipitaciones y zonas de riesgo.
                 </p>
+            </div>
 
-                <div class="progress">
+            <div class="alert alert-success">
+                <i class="bi bi-check-circle me-2"></i>
+                Sistema operativo. Última actualización:
+                <strong><time datetime="18:47:32">18:47:32</time></strong>
+            </div>
 
-                    <div class="progress-bar bg-danger" style="width: 87%;">
+            <div class="row g-4">
 
-                        2.18 m
-
+                <div class="col-md-6 col-xl-3">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h3 class="h6 text-secondary">Zonas normales</h3>
+                            <p class="h2">18</p>
+                            <span class="badge text-bg-success">Sin riesgo actual</span>
+                        </div>
                     </div>
+                </div>
 
+                <div class="col-md-6 col-xl-3">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h3 class="h6 text-secondary">Precaución</h3>
+                            <p class="h2">5</p>
+                            <span class="badge text-bg-warning">Monitoreo preventivo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xl-3">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h3 class="h6 text-secondary">Riesgo</h3>
+                            <p class="h2">3</p>
+                            <span class="badge text-bg-danger">Requiere atención</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xl-3">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h3 class="h6 text-secondary">Emergencia</h3>
+                            <p class="h2">1</p>
+                            <span class="badge text-bg-dark">Atención inmediata</span>
+                        </div>
+                    </div>
                 </div>
 
             </div>
 
-        </div>
+         
+            <div class="card shadow-sm mt-4">
+                <div class="card-body">
+                    <h3 class="h5">Nivel de agua más crítico</h3>
+                    <p class="h2 text-danger">2.18 m</p>
+                    <p class="text-secondary">Estación E-014 · Río Marapa</p>
 
+                    <div class="progress" role="progressbar" aria-label="Nivel de agua más crítico"
+                        aria-valuenow="87" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar bg-danger" style="width: 87%;">2.18 m</div>
+                    </div>
+                </div>
+            </div>
 
-    </main>
+        </section>
 
-    <main class="container-fluid p-4">
-        <section class="container my-5">
-
+       
+        <section id="zonas-riesgo" class="container my-5">
             <div class="bg-white rounded shadow p-4">
 
                 <h2 class="text-center fw-bold mb-4 text-danger">
@@ -436,47 +233,53 @@
 
                 <div class="accordion" id="localidadesAccordion">
 
-
+                   
                     <div class="accordion-item">
-                        <h2 class="accordion-header">
+                        <h3 class="accordion-header">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#capital">
+                                data-bs-target="#capital" aria-expanded="true" aria-controls="capital">
                                 Capital
                             </button>
-                        </h2>
+                        </h3>
                         <div id="capital" class="accordion-collapse collapse show">
                             <div class="accordion-body">
                                 <div class="row g-4">
+
                                     <div class="col-md-4">
-                                        <div class="card shadow-sm h-100 rounded">
-                                            <img src="/image/villa9.jfif" class="card-img-top rounded-top"
-                                                alt="Villa 9 de Julio">
+                                        <article class="card shadow-sm h-100 rounded">
+                                            <img src="/img/villa9.jfif"
+                                                class="card-img-top rounded-top img-fluid"
+                                                alt="Zona baja de Villa 9 de Julio, San Miguel de Tucumán"
+                                                width="400" height="250" loading="lazy">
                                             <div class="card-body">
-                                                <h5 class="card-title">Villa 9 de Julio</h5>
+                                                <h4 class="card-title h5">Villa 9 de Julio</h4>
                                                 <p class="card-text">Zona baja cercana a canales, con riesgo de
                                                     acumulación de agua.</p>
                                             </div>
-                                        </div>
+                                        </article>
                                     </div>
+
                                     <div class="col-md-4">
-                                        <div class="card shadow-sm h-100 rounded">
-                                            <img src="/image/sancaye.webp" class="card-img-top rounded-top"
-                                                alt="San Cayetano">
+                                        <article class="card shadow-sm h-100 rounded">
+                                            <img src="/img/sancaye.webp"
+                                                class="card-img-top rounded-top img-fluid"
+                                                alt="Barrio San Cayetano con drenaje insuficiente"
+                                                width="400" height="250" loading="lazy">
                                             <div class="card-body">
-                                                <h5 class="card-title">San Cayetano</h5>
+                                                <h4 class="card-title h5">San Cayetano</h4>
                                                 <p class="card-text">Barrio periférico con drenaje insuficiente.</p>
                                             </div>
-                                        </div>
+                                        </article>
                                     </div>
 
-
-
                                     <div class="col-md-4">
-                                        <div class="card shadow-sm h-100 rounded">
-                                            <img src="/image/puente-ferroviario-calle-24-septiembre-928696-154424.jpg"
-                                                class="card-img-top rounded-top" alt="Puente de la 24">
+                                        <article class="card shadow-sm h-100 rounded">
+                                            <img src="/img/puente-ferroviario-calle-24-septiembre-928696-154424.jpg"
+                                                class="card-img-top rounded-top img-fluid"
+                                                alt="Puente ferroviario de la calle 24 de Septiembre, Tucumán"
+                                                width="400" height="250" loading="lazy">
                                             <div class="card-body">
-                                                <h5 class="card-title">Puente de la 24</h5>
+                                                <h4 class="card-title h5">Puente de la 24</h4>
                                                 <p class="card-text">
                                                     Zona céntrica que suele inundarse en días de lluvias intensas,
                                                     afectando la circulación vehicular y peatonal.
@@ -484,123 +287,125 @@
                                                     anegamientos.
                                                 </p>
                                             </div>
-                                        </div>
+                                        </article>
                                     </div>
-
-
-
-
 
                                 </div>
                             </div>
                         </div>
                     </div>
 
-
                     <div class="accordion-item">
-                        <h2 class="accordion-header">
+                        <h3 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#gran">
+                                data-bs-target="#gran" aria-expanded="false" aria-controls="gran">
                                 Zonas en San Miguel de Tucumán
                             </button>
-                        </h2>
+                        </h3>
                         <div id="gran" class="accordion-collapse collapse">
                             <div class="accordion-body">
                                 <div class="row g-4">
+
                                     <div class="col-md-4">
-                                        <div class="card shadow-sm h-100 rounded">
-                                            <img src="/image/629983342_1278763440972584_1288355342172546299_n.jpg"
-                                                class="card-img-top rounded-top" alt="Yerba Buena">
+                                        <article class="card shadow-sm h-100 rounded">
+                                            <img src="/img/629983342_1278763440972584_1288355342172546299_n.jpg"
+                                                class="card-img-top rounded-top img-fluid"
+                                                alt="Sectores cercanos al Canal Yerba Buena, Tucumán"
+                                                width="400" height="250" loading="lazy">
                                             <div class="card-body">
-                                                <h5 class="card-title">Yerba Buena</h5>
+                                                <h4 class="card-title h5">Yerba Buena</h4>
                                                 <p class="card-text">Sectores cercanos al Canal Yerba Buena y zonas
                                                     bajas de El Corte.</p>
                                             </div>
-                                        </div>
+                                        </article>
                                     </div>
+
                                     <div class="col-md-4">
-                                        <div class="card shadow-sm h-100 rounded">
-                                            <img src="/image/Captura de pantalla 2026-09-20 045224.png"
-                                                class="card-img-top rounded-top" alt="Tafí Viejo">
+                                        <article class="card shadow-sm h-100 rounded">
+                                            <img src="/img/Captura de pantalla 2026-09-20 045224.png"
+                                                class="card-img-top rounded-top img-fluid"
+                                                alt="Barrios de Tafí Viejo próximos al Canal Tafí"
+                                                width="400" height="250" loading="lazy">
                                             <div class="card-body">
-                                                <h5 class="card-title">Tafí Viejo</h5>
+                                                <h4 class="card-title h5">Tafí Viejo</h4>
                                                 <p class="card-text">Barrios próximos al Canal Tafí y zonas cercanas
                                                     al río Lules.</p>
                                             </div>
-                                        </div>
+                                        </article>
                                     </div>
+
                                     <div class="col-md-4">
-                                        <div class="card shadow-sm h-100 rounded">
-                                            <img src="/image/banda.jfif"
-                                                class="card-img-top rounded-top" alt="Banda del Río Salí">
+                                        <article class="card shadow-sm h-100 rounded">
+                                            <img src="/img/banda.jfif"
+                                                class="card-img-top rounded-top img-fluid"
+                                                alt="Barrios ribereños de Banda del Río Salí"
+                                                width="400" height="250" loading="lazy">
                                             <div class="card-body">
-                                                <h5 class="card-title">Banda del Río Salí</h5>
-                                                <p class="card-text">Barrios ribereños como Lastenia y San Ramón.
-                                                </p>
+                                                <h4 class="card-title h5">Banda del Río Salí</h4>
+                                                <p class="card-text">Barrios ribereños como Lastenia y San Ramón.</p>
                                             </div>
-                                        </div>
+                                        </article>
                                     </div>
-
-
-                                    
 
                                 </div>
                             </div>
                         </div>
                     </div>
 
-
+                    <!-- Zonas fuera de San Miguel de Tucumán -->
                     <div class="accordion-item">
-                        <h2 class="accordion-header">
+                        <h3 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#externas">
+                                data-bs-target="#externas" aria-expanded="false" aria-controls="externas">
                                 Zonas fuera de San Miguel de Tucumán
                             </button>
-                        </h2>
+                        </h3>
                         <div id="externas" class="accordion-collapse collapse">
                             <div class="accordion-body">
                                 <div class="row g-4">
 
-                                   
-
                                     <div class="col-md-4">
-                                        <div class="card shadow-sm h-100 rounded">
-                                            <img src="/image/623259834_122210409074059030_7774986341165042616_n.jpg"
-                                                class="card-img-top rounded-top" alt="Villa Chicligasta">
+                                        <article class="card shadow-sm h-100 rounded">
+                                            <img src="/img/623259834_122210409074059030_7774986341165042616_n.jpg"
+                                                class="card-img-top rounded-top img-fluid"
+                                                alt="Villa Chicligasta, sur de Tucumán, durante un temporal"
+                                                width="400" height="250" loading="lazy">
                                             <div class="card-body">
-                                                <h5 class="card-title">Villa Chicligasta</h5>
+                                                <h4 class="card-title h5">Villa Chicligasta</h4>
                                                 <p class="card-text">Localidad del sur de la provincia,
                                                     vulnerable al desborde de ríos durante temporales intensos,
                                                     con aislamiento frecuente de caminos rurales.</p>
                                             </div>
-                                        </div>
+                                        </article>
                                     </div>
 
-                                    
-
                                     <div class="col-md-4">
-                                        <div class="card shadow-sm h-100 rounded">
-                                            <img src="/image/621805018_122164574084823962_3467613018937982688_n.jpg"
-                                                class="card-img-top rounded-top" alt="Cruz Alta">
+                                        <article class="card shadow-sm h-100 rounded">
+                                            <img src="/img/621805018_122164574084823962_3467613018937982688_n.jpg"
+                                                class="card-img-top rounded-top img-fluid"
+                                                alt="Cruz Alta, llanura aluvial del Salí, con anegamiento"
+                                                width="400" height="250" loading="lazy">
                                             <div class="card-body">
-                                                <h5 class="card-title">Cruz Alta</h5>
+                                                <h4 class="card-title h5">Cruz Alta</h4>
                                                 <p class="card-text">Zona de la llanura aluvial del Salí, con
                                                     napas altas y riesgo de anegamiento por lluvias intensas.</p>
                                             </div>
-                                        </div>
+                                        </article>
                                     </div>
 
                                     <div class="col-md-4">
-                                        <div class="card shadow-sm h-100 rounded">
-                                            <img src="/image/650838740_871096132644078_2086915501003664637_n.jpg"
-                                                class="card-img-top rounded-top" alt="Leales">
+                                        <article class="card shadow-sm h-100 rounded">
+                                            <img src="/img/650838740_871096132644078_2086915501003664637_n.jpg"
+                                                class="card-img-top rounded-top img-fluid"
+                                                alt="Localidad de Leales, Tucumán, con riesgo de anegamiento"
+                                                width="400" height="250" loading="lazy">
                                             <div class="card-body">
-                                                <h5 class="card-title">Leales</h5>
+                                                <h4 class="card-title h5">Leales</h4>
                                                 <p class="card-text">Localidad ubicada entre las rutas 38 y 9,
                                                     en la llanura aluvial del Salí, con napas altas y riesgo de
                                                     anegamiento por lluvias intensas.</p>
                                             </div>
-                                        </div>
+                                        </article>
                                     </div>
 
                                 </div>
@@ -611,11 +416,11 @@
                 </div>
             </div>
         </section>
-    </main>
 
-    <main class="container-fluid p-4">
-        <section class="container my-5">
+        <!-- Medidas preventivas -->
+        <section id="medidas" class="container my-5">
             <div class="bg-white rounded shadow p-4">
+
                 <h2 class="text-center fw-bold mb-4 text-success">
                     <i class="bi bi-shield-check me-2"></i>
                     Medidas Preventivas
@@ -624,11 +429,12 @@
                 <div class="row g-4 text-center">
 
                     <div class="col-md-4">
-                        <div class="card h-100 shadow-sm border-success animate__animated animate__fadeInUp">
-                            <img src="/image/Limpiar desagües.jpg" class="card-img-top rounded-top"
-                                alt="Limpiar desagües">
+                        <article class="card h-100 shadow-sm border-success animate__animated animate__fadeInUp">
+                            <img src="/img/Limpiar desagües.jpg" class="card-img-top rounded-top img-fluid"
+                                alt="Persona limpiando un desagüe pluvial para evitar inundaciones"
+                                width="400" height="250" loading="lazy">
                             <div class="card-body">
-                                <h5 class="card-title">Limpiar desagües</h5>
+                                <h3 class="card-title h5">Limpiar desagües</h3>
                                 <p class="card-text">
                                     Mantener los desagües y canales libres de basura y hojas es fundamental para que el
                                     agua de lluvia pueda circular sin obstrucciones.
@@ -636,67 +442,68 @@
                                     calles y viviendas.
                                 </p>
                             </div>
-                        </div>
+                        </article>
                     </div>
 
                     <div class="col-md-4">
-                        <div
+                        <article
                             class="card h-100 shadow-sm border-warning animate__animated animate__fadeInUp animate__delay-1s">
-                            <img src="/image/GNLN3MI7N5BDHPUO65TAE7ORCQ.jpg" class="card-img-top rounded-top"
-                                alt="No tirar basura">
+                            <img src="/img/GNLN3MI7N5BDHPUO65TAE7ORCQ.jpg" class="card-img-top rounded-top img-fluid"
+                                alt="Basura acumulada en la vía pública que bloquea el drenaje"
+                                width="400" height="250" loading="lazy">
                             <div class="card-body">
-                                <h5 class="card-title">No tirar basura</h5>
+                                <h3 class="card-title h5">No tirar basura</h3>
                                 <p class="card-text">
                                     Arrojar residuos en la vía pública o en cursos de agua bloquea el drenaje natural y
                                     aumenta el riesgo de desbordes.
                                     Mantener la ciudad limpia es una responsabilidad compartida que protege a todos.
                                 </p>
                             </div>
-                        </div>
+                        </article>
                     </div>
 
-
                     <div class="col-md-4">
-                        <div
+                        <article
                             class="card h-100 shadow-sm border-danger animate__animated animate__fadeInUp animate__delay-2s">
-                            <img src="/image/Kit de supervivencia.jpg" class="card-img-top rounded-top"
-                                alt="Kit de emergencia">
+                            <img src="/img/Kit de supervivencia.jpg" class="card-img-top rounded-top img-fluid"
+                                alt="Kit de emergencia con linterna, agua, radio y documentos"
+                                width="400" height="250" loading="lazy">
                             <div class="card-body">
-                                <h5 class="card-title">Kit de emergencia</h5>
+                                <h3 class="card-title h5">Kit de emergencia</h3>
                                 <p class="card-text">
                                     Preparar un kit con linterna, agua potable, radio, medicamentos y documentos
                                     importantes garantiza que la familia esté lista para actuar rápidamente en caso de
                                     evacuación o cortes de servicios básicos.
                                 </p>
                             </div>
-                        </div>
+                        </article>
                     </div>
 
-
                     <div class="col-md-6">
-                        <div
+                        <article
                             class="card h-100 shadow-sm border-primary animate__animated animate__fadeInUp animate__delay-3s">
-                            <img src="/image/cell-broadcast.jpg" class="card-img-top rounded-top"
-                                alt="Seguir alertas oficiales">
+                            <img src="/img/cell-broadcast.jpg" class="card-img-top rounded-top img-fluid"
+                                alt="Celular recibiendo una alerta oficial de emergencia"
+                                width="600" height="300" loading="lazy">
                             <div class="card-body">
-                                <h5 class="card-title">Seguir alertas oficiales</h5>
+                                <h3 class="card-title h5">Seguir alertas oficiales</h3>
                                 <p class="card-text">
                                     Consultar siempre las alertas emitidas por el sistema SIAI y organismos oficiales
                                     permite tomar decisiones informadas.
                                     Estas alertas indican cuándo es necesario evacuar o extremar precauciones.
                                 </p>
                             </div>
-                        </div>
+                        </article>
                     </div>
 
-
                     <div class="col-md-6">
-                        <div
+                        <article
                             class="card h-100 shadow-sm border-info animate__animated animate__fadeInUp animate__delay-4s">
-                            <img src="/image/Copilot_20260920_053406.png" class="card-img-top rounded-top"
-                                alt="Rutas de evacuación">
+                            <img src="/img/Copilot_20260920_053406.png" class="card-img-top rounded-top img-fluid"
+                                alt="Mapa de rutas de evacuación hacia zonas altas"
+                                width="600" height="300" loading="lazy">
                             <div class="card-body">
-                                <h5 class="card-title">Rutas de evacuación</h5>
+                                <h3 class="card-title h5">Rutas de evacuación</h3>
                                 <p class="card-text">
                                     Identificar previamente caminos seguros hacia zonas altas y centros de evacuación
                                     reduce el tiempo de reacción en una emergencia.
@@ -704,12 +511,13 @@
                                     regularmente.
                                 </p>
                             </div>
-                        </div>
+                        </article>
                     </div>
 
                 </div>
             </div>
         </section>
+
     </main>
 
 
@@ -718,11 +526,10 @@
             <div class="row align-items-center">
 
                 <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
-                    <img src="../image/logogota..png" alt="Logo SIAI Tucumán"
-                        style="width: 40px; height: 40px; margin-right: 8px;">
+                    <img src="/img/logogota..png" alt="Logo SIAI Tucumán"
+                        style="width: 40px; height: 40px; margin-right: 8px;" width="40" height="40" loading="lazy">
                     <span class="fw-bold text-primary">SIAI Tucumán</span>
                 </div>
-
 
                 <div class="col-md-4 text-center mb-3 mb-md-0">
                     <p class="mb-0 text-secondary">
@@ -732,19 +539,20 @@
                 </div>
 
                 <div class="col-md-4 text-center text-md-end">
-                    <a href="#" class="text-secondary">
+                    <!-- Reemplazá por tu correo real -->
+                    <a href="mailto:contacto@tudominio.com" class="text-secondary"
+                        aria-label="Enviar un correo a SIAI Tucumán">
                         <i class="bi bi-envelope-fill fs-5"></i>
                     </a>
                 </div>
+
             </div>
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/index.js" defer></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-    </script>
-    <script src="/js/index.js"></script>
-
-    </body>
+</body>
 
 </html>

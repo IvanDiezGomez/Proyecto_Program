@@ -1,318 +1,226 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-AR">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>SIAI Tucumán - Mediciones</title>
+    <!-- SEO básico -->
+    <title>Mediciones de nivel y precipitaciones en Tucumán | SIAI Tucumán</title>
+    <meta name="description" content="Consulta las últimas mediciones de nivel de agua, precipitación, humedad y temperatura registradas por las estaciones hidrológicas de Tucumán.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="SIAI Tucumán">
+    <meta name="theme-color" content="#212529">
+    <link rel="canonical" href="https://siaitucuman.netlify.app/mediciones.html">
+    <link rel="icon" href="../img/logogota..png">
 
+    <!-- Open Graph (WhatsApp, Facebook, etc.) -->
+    <meta property="og:title" content="Mediciones de nivel y precipitaciones en Tucumán | SIAI Tucumán">
+    <meta property="og:description" content="Últimas mediciones de nivel de agua, precipitación, humedad y temperatura de las estaciones hidrológicas de Tucumán.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://siaitucuman.netlify.app/mediciones.html">
+    <meta property="og:image" content="https://siaitucuman.netlify.app/img/logogota..png">
+    <meta property="og:locale" content="es_AR">
+
+    <!-- Estilos -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
     <link rel="stylesheet" href="responsive.css">
 </head>
 
 <body class="bg-light">
 
-
-
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Navegación principal">
         <div class="container-fluid">
 
             <a class="navbar-brand fw-bold" href="index.html">
-
-                <img src="../image/logogota..png" alt="Logo SIAI Tucumán"
-                    style="width: 35px; height: 35px; margin-right: 8px;">
-
+                <img src="../img/logogota.png" alt="Logo SIAI Tucumán" width="35" height="35" class="me-2">
                 SIAI Tucumán
-
             </a>
 
-            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
-
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#menu"
+                    aria-controls="menu" aria-expanded="false"
+                    aria-label="Abrir menú de navegación">
                 <span class="navbar-toggler-icon"></span>
-
             </button>
 
             <div class="collapse navbar-collapse" id="menu">
-
                 <ul class="navbar-nav ms-auto">
-
-
 
                     <li class="nav-item">
                         <a class="nav-link" href="mapa.html">
-                            <i class="bi bi-map me-1"></i>
+                            <i class="bi bi-map me-1" aria-hidden="true"></i>
                             Mapa
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="alertas.html">
-                            <i class="bi bi-exclamation-triangle me-1"></i>
+                            <i class="bi bi-exclamation-triangle me-1" aria-hidden="true"></i>
                             Alertas
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link" href="estaciones.html">
-                            <i class="bi bi-broadcast me-1"></i>
+                            <i class="bi bi-broadcast me-1" aria-hidden="true"></i>
                             Estaciones
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link active" href="mediciones.html">
-                            <i class="bi bi-graph-up me-1"></i>
+                        <a class="nav-link active" aria-current="page" href="mediciones.html">
+                            <i class="bi bi-graph-up me-1" aria-hidden="true"></i>
                             Mediciones
                         </a>
                     </li>
 
-
                 </ul>
-
             </div>
-
         </div>
-
     </nav>
 
-
+  
     <main class="container-fluid p-4">
 
-        <h1 class="h3">
+        <header class="mb-4">
+            <h1 class="h3">
+                <i class="bi bi-graph-up me-2" aria-hidden="true"></i>
+                Mediciones
+            </h1>
+            <p class="text-secondary mb-0">
+                Datos registrados por las estaciones.
+            </p>
+        </header>
 
-            <i class="bi bi-graph-up me-2"></i>
-
-            Mediciones
-
-        </h1>
-
-        <p class="text-secondary">
-            Datos registrados por las estaciones.
-        </p>
-
-
-        <!-- FILTROS -->
-
-        <div class="card shadow-sm mb-4">
-
+     
+        <section class="card shadow-sm mb-4" aria-labelledby="titulo-filtros">
             <div class="card-body">
+                <h2 id="titulo-filtros" class="visually-hidden">Filtrar mediciones</h2>
 
-                <div class="row g-3">
+                <form action="mediciones.html" method="get">
+                    <div class="row g-3">
 
-                    <div class="col-md-4">
+                        <div class="col-md-4">
+                            <label for="filtro-estacion" class="form-label">Estación</label>
+                            <select id="filtro-estacion" name="estacion" class="form-select">
+                                <option value="">Todas</option>
+                                <option value="E-001">E-001</option>
+                                <option value="E-004">E-004</option>
+                                <option value="E-008">E-008</option>
+                                <option value="E-014">E-014</option>
+                            </select>
+                        </div>
 
-                        <label class="form-label">
-                            Estación
-                        </label>
+                        <div class="col-md-3">
+                            <label for="filtro-desde" class="form-label">Desde</label>
+                            <input type="date" id="filtro-desde" name="desde" class="form-control">
+                        </div>
 
-                        <select class="form-select">
+                        <div class="col-md-3">
+                            <label for="filtro-hasta" class="form-label">Hasta</label>
+                            <input type="date" id="filtro-hasta" name="hasta" class="form-control">
+                        </div>
 
-                            <option>Todas</option>
-                            <option>E-001</option>
-                            <option>E-004</option>
-                            <option>E-008</option>
-                            <option>E-014</option>
-
-                        </select>
-
-                    </div>
-
-
-                    <div class="col-md-3">
-
-                        <label class="form-label">
-                            Desde
-                        </label>
-
-                        <input type="date" class="form-control">
-
-                    </div>
-
-
-                    <div class="col-md-3">
-
-                        <label class="form-label">
-                            Hasta
-                        </label>
-
-                        <input type="date" class="form-control">
+                        <div class="col-md-2 d-flex align-items-end">
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="bi bi-search" aria-hidden="true"></i>
+                                Buscar
+                            </button>
+                        </div>
 
                     </div>
-
-
-                    <div class="col-md-2 d-flex align-items-end">
-
-                        <button class="btn btn-primary w-100">
-
-                            <i class="bi bi-search"></i>
-
-                            Buscar
-
-                        </button>
-
-                    </div>
-
-                </div>
-
+                </form>
             </div>
+        </section>
 
-        </div>
-
-
-
-
-        <div class="card shadow-sm">
+      
+        <section class="card shadow-sm" aria-labelledby="titulo-mediciones">
 
             <div class="card-header">
-
-                <strong>
-                    Últimas mediciones
-                </strong>
-
+                <h2 id="titulo-mediciones" class="h6 mb-0">Últimas mediciones</h2>
             </div>
 
             <div class="table-responsive">
-
                 <table class="table table-hover align-middle mb-0">
 
+                    <caption class="visually-hidden">
+                        Últimas mediciones de nivel, precipitación, humedad y temperatura por estación
+                    </caption>
+
                     <thead class="table-light">
-
                         <tr>
-
-                            <th>Fecha</th>
-                            <th>Estación</th>
-                            <th>Nivel</th>
-                            <th>Precipitación</th>
-                            <th>Humedad</th>
-                            <th>Temperatura</th>
-                            <th>Estado</th>
-
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Estación</th>
+                            <th scope="col">Nivel</th>
+                            <th scope="col">Precipitación</th>
+                            <th scope="col">Humedad</th>
+                            <th scope="col">Temperatura</th>
+                            <th scope="col">Estado</th>
                         </tr>
-
                     </thead>
 
                     <tbody>
 
                         <tr>
-
-                            <td>16/09/2026 18:47</td>
-
-                            <td>E-014</td>
-
-                            <td>
-                                <strong>2.18 m</strong>
-                            </td>
-
+                            <td><time datetime="2026-10-01T09:30">01/10/2026 09:30</time></td>
+                            <th scope="row" class="fw-normal">E-014</th>
+                            <td><strong>2.18 m</strong></td>
                             <td>112.8 mm</td>
-
                             <td>86%</td>
-
                             <td>19.2 °C</td>
-
-                            <td>
-                                <span class="badge text-bg-danger">
-                                    Crítico
-                                </span>
-                            </td>
-
+                            <td><span class="badge text-bg-danger">Crítico</span></td>
                         </tr>
 
-
                         <tr>
-
-                            <td>16/09/2026 18:46</td>
-
-                            <td>E-008</td>
-
+                            <td><time datetime="2026-10-01T09:29">01/10/2026 09:29</time></td>
+                            <th scope="row" class="fw-normal">E-008</th>
                             <td>1.78 m</td>
-
                             <td>72.1 mm</td>
-
                             <td>82%</td>
-
                             <td>19.8 °C</td>
-
-                            <td>
-                                <span class="badge text-bg-warning">
-                                    Riesgo
-                                </span>
-                            </td>
-
+                            <td><span class="badge text-bg-warning">Riesgo</span></td>
                         </tr>
 
-
                         <tr>
-
-                            <td>16/09/2026 18:45</td>
-
-                            <td>E-004</td>
-
+                            <td><time datetime="2026-10-01T09:29">01/10/2026 09:29</time></td>
+                            <th scope="row" class="fw-normal">E-004</th>
                             <td>1.42 m</td>
-
                             <td>48.7 mm</td>
-
                             <td>78%</td>
-
                             <td>20.1 °C</td>
-
-                            <td>
-                                <span class="badge text-bg-warning">
-                                    Precaución
-                                </span>
-                            </td>
-
+                            <td><span class="badge text-bg-warning">Precaución</span></td>
                         </tr>
 
-
                         <tr>
-
-                            <td>16/09/2026 18:44</td>
-
-                            <td>E-001</td>
-
+                            <td><time datetime="2026-10-01T09:28">01/10/2026 09:28</time></td>
+                            <th scope="row" class="fw-normal">E-001</th>
                             <td>0.82 m</td>
-
                             <td>12.4 mm</td>
-
                             <td>71%</td>
-
                             <td>21.4 °C</td>
-
-                            <td>
-                                <span class="badge text-bg-success">
-                                    Normal
-                                </span>
-                            </td>
-
+                            <td><span class="badge text-bg-success">Normal</span></td>
                         </tr>
 
                     </tbody>
 
                 </table>
-
             </div>
 
-        </div>
+        </section>
 
     </main>
+
+
     <footer class="bg-light border-top mt-5">
         <div class="container py-4">
             <div class="row align-items-center">
 
                 <div class="col-md-4 text-center text-md-start mb-3 mb-md-0">
-                    <img src="../image/logogota..png" alt="Logo SIAI Tucumán"
-                        style="width: 40px; height: 40px; margin-right: 8px;">
+                    <img src="../img/logogota..png" alt="Logo SIAI Tucumán" width="40" height="40" class="me-2">
                     <span class="fw-bold text-primary">SIAI Tucumán</span>
                 </div>
-
 
                 <div class="col-md-4 text-center mb-3 mb-md-0">
                     <p class="mb-0 text-secondary">
@@ -322,17 +230,17 @@
                 </div>
 
                 <div class="col-md-4 text-center text-md-end">
-                    <a href="#" class="text-secondary">
-                        <i class="bi bi-envelope-fill fs-5"></i>
+                    <a href="mailto:contacto@tudominio.com" class="text-secondary"
+                       aria-label="Enviar correo a SIAI Tucumán">
+                        <i class="bi bi-envelope-fill fs-5" aria-hidden="true"></i>
                     </a>
                 </div>
+
             </div>
         </div>
     </footer>
 
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
