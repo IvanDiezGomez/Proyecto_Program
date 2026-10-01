@@ -205,14 +205,13 @@ Para visualizar el proyecto de manera local:
 
 1. Descargar o clonar el repositorio.
 2. Abrir la carpeta `Proyecto_Program`.
-3. Ingresar a la carpeta `pages`.
-4. Abrir el archivo `index.html` en el navegador.
+3. Abrir el archivo `index.html` en el navegador.
 
 También se puede utilizar **Visual Studio Code** junto con **Live Server** para ejecutar el proyecto durante el desarrollo.
 
 ---
 ## Enlaces y Accesos rapidos del proyecto
 
-* Demo en Netlify: ** [https://sistemaprevencion.netlify.app]
+* Demo en Netlify: ** https://siaitucuman.netlify.app/
 * Repositorio en GitHub: ** [https://github.com/IvanDiezGomez/Proyecto_Program]
 
